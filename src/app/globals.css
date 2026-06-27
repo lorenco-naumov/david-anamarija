@@ -1,0 +1,427 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6efe4;
+  --foreground: #171513;
+  --ivory: #f8f2e8;
+  --pearl: #fffaf1;
+  --linen: #e9ddca;
+  --taupe: #a28d72;
+  --taupe-soft: #d8cbb8;
+  --wine: #5b0f1c;
+  --wine-dark: #2b0710;
+  --gold: #a88658;
+  --ink-muted: #51483e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ui), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+::selection {
+  background: rgba(91, 15, 28, 0.18);
+}
+
+a,
+button,
+input {
+  outline-color: var(--wine);
+}
+
+.invitation-page {
+  min-height: 100vh;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at 12% 9%, rgba(255, 250, 241, 0.85), transparent 28rem),
+    radial-gradient(circle at 90% 22%, rgba(216, 203, 184, 0.28), transparent 25rem),
+    linear-gradient(180deg, var(--pearl), var(--background) 30%, #f4eadc 100%);
+}
+
+.invitation-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(91, 15, 28, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 15, 28, 0.04) 1px, transparent 1px);
+  background-size: 58px 58px, 58px 58px;
+  mask-image: radial-gradient(circle at 50% 10%, black, transparent 72%);
+}
+
+.section-shell {
+  position: relative;
+  z-index: 1;
+  margin-inline: auto;
+  width: min(100%, 1680px);
+  padding-inline: clamp(1.25rem, 4vw, 5.8rem);
+}
+
+.section-pad {
+  padding-block: clamp(5.5rem, 10vw, 11rem);
+}
+
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.display-italic {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-weight: 450;
+}
+
+.label {
+  color: var(--foreground);
+  font-size: clamp(0.72rem, 0.72vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.fine-line {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--gold);
+}
+
+.fine-line::before,
+.fine-line::after {
+  content: "";
+  display: block;
+  width: min(11rem, 22vw);
+  height: 1px;
+  background: color-mix(in srgb, var(--gold) 62%, transparent);
+}
+
+.ornament {
+  display: inline-grid;
+  place-items: center;
+  width: 0.66rem;
+  height: 0.66rem;
+  color: var(--gold);
+  transform: rotate(45deg);
+}
+
+.ornament::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border: 1px solid currentColor;
+}
+
+.wine-button {
+  display: inline-flex;
+  min-height: 4.35rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  border: 1px solid var(--wine);
+  background: linear-gradient(135deg, var(--wine), var(--wine-dark));
+  color: var(--pearl);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.44em;
+  padding: 1.35rem 2.25rem;
+  text-transform: uppercase;
+  transition:
+    border-color 240ms ease,
+    transform 240ms ease,
+    background 240ms ease;
+}
+
+.wine-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #701729, var(--wine-dark));
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+  color: var(--foreground);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  padding-bottom: 0.45rem;
+  text-transform: uppercase;
+  transition:
+    color 240ms ease,
+    transform 240ms ease;
+}
+
+.text-button:hover {
+  color: var(--wine);
+  transform: translateY(-2px);
+}
+
+.image-frame {
+  position: relative;
+  border: 1px solid rgba(168, 134, 88, 0.42);
+  background: var(--pearl);
+  box-shadow: 0 1.5rem 4rem rgba(56, 36, 21, 0.08);
+}
+
+.image-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1.35rem -1.35rem auto auto;
+  z-index: -1;
+  width: 72%;
+  height: 70%;
+  background:
+    linear-gradient(rgba(91, 15, 28, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 15, 28, 0.04) 1px, transparent 1px),
+    #ded2bf;
+  background-size: 18px 18px;
+  opacity: 0.42;
+}
+
+.image-frame img {
+  object-fit: cover;
+}
+
+.botanical {
+  position: absolute;
+  pointer-events: none;
+  color: rgba(162, 141, 114, 0.44);
+}
+
+.botanical svg {
+  height: 100%;
+  width: 100%;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-inline: auto;
+  max-width: 55rem;
+}
+
+.countdown-unit {
+  display: grid;
+  min-height: 9rem;
+  place-items: center;
+  position: relative;
+}
+
+.countdown-unit + .countdown-unit {
+  border-left: 1px solid rgba(168, 134, 88, 0.48);
+}
+
+.countdown-value {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  font-weight: 430;
+  line-height: 0.8;
+  color: var(--wine-dark);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.detail-item {
+  min-height: 26rem;
+  padding: 1rem clamp(1rem, 3vw, 3.75rem);
+  text-align: center;
+}
+
+.detail-item + .detail-item {
+  border-left: 1px solid rgba(168, 134, 88, 0.45);
+}
+
+.rsvp-form {
+  display: grid;
+  gap: 2.4rem;
+}
+
+.field-line {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.field-line span,
+.attendance-field legend {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.field-line input {
+  border: 0;
+  border-bottom: 1px solid rgba(23, 21, 19, 0.44);
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  min-height: 3.25rem;
+}
+
+.attendance-field {
+  border: 0;
+  display: grid;
+  gap: 1.15rem;
+  margin: 0;
+  padding: 0;
+}
+
+.attendance-field label {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  min-height: 2.1rem;
+}
+
+.attendance-field input {
+  appearance: none;
+  border: 1px solid rgba(23, 21, 19, 0.55);
+  border-radius: 999px;
+  height: 1.55rem;
+  margin: 0;
+  width: 1.55rem;
+}
+
+.attendance-field input:checked {
+  border: 0.42rem solid var(--wine);
+}
+
+.attendance-field span {
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.rsvp-submit {
+  justify-content: space-between;
+  max-width: 31rem;
+}
+
+.form-status {
+  color: var(--wine);
+  min-height: 1.5rem;
+}
+
+.faq-list {
+  display: grid;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(168, 134, 88, 0.45);
+}
+
+.faq-item button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--foreground);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  min-height: 6.5rem;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.faq-item button span {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.faq-item svg {
+  transition: transform 220ms ease;
+}
+
+.faq-answer {
+  color: var(--ink-muted);
+  font-size: 1.04rem;
+  line-height: 1.8;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 980px) {
+  .detail-grid,
+  .countdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item + .detail-item,
+  .countdown-unit + .countdown-unit {
+    border-left: 0;
+    border-top: 1px solid rgba(168, 134, 88, 0.45);
+  }
+
+  .detail-item {
+    min-height: unset;
+    padding-block: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .wine-button {
+    min-height: 3.85rem;
+    width: 100%;
+    padding-inline: 1.25rem;
+  }
+
+  .text-button {
+    justify-content: center;
+  }
+
+  .label,
+  .field-line span,
+  .attendance-field legend,
+  .attendance-field span,
+  .faq-item button span {
+    letter-spacing: 0.24em;
+  }
+
+  .countdown-value {
+    font-size: 4.8rem;
+  }
+}
