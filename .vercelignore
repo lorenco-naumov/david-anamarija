@@ -1,0 +1,8 @@
+.next
+.vercel
+node_modules
+dev-server*.log
+design-qa-artifacts
+design-qa.md
+.agents
+public/images/design-source

@@ -12,6 +12,7 @@ function getCountdown(target: string) {
     days: Math.floor(diff / day),
     hours: Math.floor((diff % day) / hour),
     minutes: Math.floor((diff % hour) / minute),
+    seconds: Math.floor((diff % minute) / 1000),
   };
 }
 
@@ -26,6 +27,7 @@ export function Countdown({ target }: { target: string }) {
       { value: remaining.days, label: "Days" },
       { value: remaining.hours, label: "Hours" },
       { value: remaining.minutes, label: "Minutes" },
+      { value: remaining.seconds, label: "Seconds" },
     ],
     [remaining],
   );
@@ -33,22 +35,20 @@ export function Countdown({ target }: { target: string }) {
   useEffect(() => {
     const id = window.setInterval(() => {
       setRemaining(getCountdown(target));
-    }, 30_000);
+    }, 1000);
 
     return () => window.clearInterval(id);
   }, [target]);
 
   return (
     <div
-      aria-label={`${remaining.days} days, ${remaining.hours} hours, and ${remaining.minutes} minutes until the wedding`}
+      aria-label={`${remaining.days} days, ${remaining.hours} hours, ${remaining.minutes} minutes, and ${remaining.seconds} seconds until the wedding`}
       className="countdown-grid"
       data-reveal-group
     >
       {values.map((item) => (
         <div className="countdown-unit" data-reveal-child key={item.label}>
-          <span className="countdown-value">
-            {item.label === "Days" ? item.value : pad(item.value)}
-          </span>
+          <span className="countdown-value">{pad(item.value)}</span>
           <span className="label">{item.label}</span>
         </div>
       ))}

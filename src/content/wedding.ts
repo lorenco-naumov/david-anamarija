@@ -1,92 +1,66 @@
-export type Attendance = "yes" | "no";
-
-export type RsvpPayload = {
-  name: string;
-  attendance: Attendance;
-};
-
 export const wedding = {
   couple: {
     names: "David & Anamarija",
     initials: "D & A",
   },
   date: {
-    iso: "2026-09-21T17:00:00+02:00",
-    display: "21 September 2026",
+    iso: "2027-09-14T16:30:00+02:00",
+    display: "14 September 2027",
+    numericLabel: "14 / 09 / 27",
+    day: "14",
+    month: "09",
+    yearShort: "27",
   },
   venue: {
-    name: "Villa Aurelia",
-    location: "Lake Como, Italy",
-    arrival: "Arrive by 16:30 for a champagne welcome before the ceremony.",
-    travel:
-      "Boats and private transfers can be arranged from Como and Bellagio.",
+    name: "Garden Ballroom, Skopje",
+    city: "Skopje",
+    location: "Skopje, North Macedonia",
+    address: "Str. 16-ta Makedonska Brigada 18, Skopje 1000, North Macedonia",
+    arrival:
+      "Arrive, unwind, and celebrate with us at a place where timeless elegance meets unforgettable views.",
+    parking: "Valet and guest parking available",
+    travel: "Guest parking and valet service will be available at the venue.",
     mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Lake%20Como%20Italy",
+      "https://www.google.com/maps/search/?api=1&query=Garden%20Ballroom%20Skopje",
   },
   rsvp: {
-    deadline: "1 August 2026",
-  },
-  story: {
-    title: "Their story",
-    pullQuote: "A quiet beginning, a long table, a promise kept.",
-    paragraphs: [
-      "We met in late summer, somewhere between a shared bottle of wine and a walk that lasted until the city lights turned gold.",
-      "Since then, every ordinary day has learned to feel ceremonial.",
-    ],
+    deadline: "1 August 2027",
   },
   details: [
     {
       title: "Ceremony",
-      time: "17:00",
-      description: "Garden terrace",
-      icon: "rings",
+      description: "St. Sophia Chapel - 16:30",
+      icon: "ceremony",
     },
     {
       title: "Reception",
-      time: "19:30",
-      description: "Candlelit dinner",
-      icon: "glasses",
+      description: "Garden Ballroom - 19:00",
+      icon: "reception",
     },
     {
-      title: "Dress code",
-      time: "Black tie optional",
-      description: "Ivory, black, wine, and evening metallics welcome.",
+      title: "Dress Code",
+      description: "Black Tie / Evening Elegance",
       icon: "dress",
+    },
+    {
+      title: "Notes",
+      description: "Dinner, music, and dancing to follow",
+      icon: "music",
     },
   ],
   timeline: [
-    { time: "15:30", label: "Arrival" },
-    { time: "17:00", label: "Ceremony" },
-    { time: "18:00", label: "Aperitivo", active: true },
-    { time: "19:30", label: "Dinner" },
-    { time: "22:00", label: "Dancing" },
-    { time: "Late", label: "Champagne" },
-  ],
-  gallery: [
+    { time: "16:30", label: "Ceremony", description: "We say I do." },
     {
-      title: "Summer wine",
-      src: "/images/wedding/champagne-table.png",
-      alt: "Champagne coupes and pale florals on ivory linen.",
+      time: "17:30",
+      label: "Aperitif",
+      description: "Cocktails, canapes and conversation.",
     },
+    { time: "19:00", label: "Dinner", description: "A curated menu and fine wine." },
+    { time: "21:00", label: "First Dance", description: "One song, a lifetime to go." },
     {
-      title: "The walk home",
-      src: "/images/wedding/gallery-walk.png",
-      alt: "A couple walking away along a quiet European street at dusk.",
-    },
-    {
-      title: "Morning light",
-      src: "/images/wedding/gallery-florals.png",
-      alt: "Pale wedding flowers arranged on ivory linen.",
-    },
-    {
-      title: "After midnight",
-      src: "/images/wedding/story-hands.png",
-      alt: "Two ringed hands resting together on silk.",
-    },
-    {
-      title: "After midnight",
-      src: "/images/wedding/hero-still-life.png",
-      alt: "Champagne, candles, flowers, and ivory fabric in daylight.",
+      time: "Late Night",
+      label: "Celebration",
+      description: "Dancing, laughter and unforgettable memories.",
     },
   ],
   faq: [
@@ -95,10 +69,72 @@ export const wedding = {
       answer: "Please refer to your invitation.",
     },
     {
-      question: "Where should we stay?",
-      answer: "A hotel list will be shared soon.",
+      question: "When should I RSVP?",
+      answer: "Please send your answer by 1 August 2027.",
+    },
+    {
+      question: "Is accommodation available nearby?",
+      answer: "A short hotel list will be shared with guests soon.",
     },
   ],
+  assetImages: {
+    bouquetCutout: {
+      src: "/images/wedding-assets/bouquet-cutout.png",
+      alt: "Ivory wedding bouquet.",
+    },
+    candleFlorals: {
+      src: "/images/wedding-assets/candle-florals.png",
+      alt: "Candlelit ivory flowers.",
+    },
+    champagneCoupes: {
+      src: "/images/wedding-assets/champagne-coupes-candles.png",
+      alt: "Champagne coupes with candles and white flowers.",
+    },
+    couplePortrait: {
+      src: "/images/wedding-assets/couple-portrait.png",
+      alt: "Bride and groom seated close together by candlelight.",
+    },
+    fabricTexture: {
+      src: "/images/wedding-assets/fabric-texture.png",
+      alt: "Soft ivory fabric texture.",
+    },
+    flowerCutoutSoft: {
+      src: "/images/wedding-assets/flower-cutout-soft.png",
+      alt: "Soft ivory flower detail.",
+    },
+    flowerCutoutWide: {
+      src: "/images/wedding-assets/flower-cutout-wide.png",
+      alt: "Wide ivory flower detail.",
+    },
+    glassCandle: {
+      src: "/images/wedding-assets/glass-candle.png",
+      alt: "Candle glowing inside a crystal glass.",
+    },
+    invitationCard: {
+      src: "/images/wedding-assets/invitation-card.png",
+      alt: "David and Anamarija invitation card among candles and flowers.",
+    },
+    singleFlowerFabric: {
+      src: "/images/wedding-assets/single-flower-fabric.png",
+      alt: "Single ivory flower resting on fabric.",
+    },
+    stoneTexture: {
+      src: "/images/wedding-assets/stone-texture.png",
+      alt: "Ivory plaster texture.",
+    },
+    thankYouCard: {
+      src: "/images/wedding-assets/thank-you-card.png",
+      alt: "Thank you card for David and Anamarija wedding guests.",
+    },
+    venueTerrace: {
+      src: "/images/wedding-assets/venue-terrace-table.png",
+      alt: "Elegant wedding table on a stone terrace at sunset.",
+    },
+    waxSeal: {
+      src: "/images/wedding-assets/wax-seal.png",
+      alt: "Ivory wax seal on sheer fabric.",
+    },
+  },
   images: {
     hero: {
       src: "/images/wedding/hero-still-life.png",
@@ -130,10 +166,3 @@ export const wedding = {
     },
   },
 } as const;
-
-export async function submitRsvp(
-  payload: RsvpPayload,
-): Promise<{ ok: true; payload: RsvpPayload }> {
-  await new Promise((resolve) => setTimeout(resolve, 650));
-  return { ok: true, payload };
-}

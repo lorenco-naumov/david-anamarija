@@ -9,7 +9,7 @@ type FaqItem = {
 };
 
 export function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(-1);
 
   return (
     <div className="faq-list" data-reveal-group>
