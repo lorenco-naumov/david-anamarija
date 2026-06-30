@@ -25,6 +25,8 @@
 }
 
 html {
+  background: var(--paper);
+  color-scheme: light;
   scroll-behavior: smooth;
   scroll-padding-top: 6.5rem;
   scrollbar-width: none;
@@ -39,6 +41,12 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-ui), Arial, Helvetica, sans-serif;
+}
+
+:root,
+html,
+body {
+  forced-color-adjust: none;
 }
 
 button,
@@ -1176,8 +1184,20 @@ summary:focus-visible {
 }
 
 @media (max-width: 720px) {
+  .invitation-content {
+    padding-bottom: 0;
+  }
+
   .page-floral-decoration {
     height: 66.667vw;
+  }
+
+  .bottom-floral-decoration {
+    bottom: -0.75rem;
+  }
+
+  .invitation-section + .invitation-section {
+    margin-top: 2.5rem;
   }
 
   .decorative-script {
@@ -1200,8 +1220,18 @@ summary:focus-visible {
   }
 
   .hero-section {
+    gap: 0;
     overflow: visible;
+    padding-bottom: 1.5rem;
     padding-top: 5.6rem;
+  }
+
+  .details-section {
+    padding-top: 3rem;
+  }
+
+  .closing-section {
+    padding-bottom: 0.5rem;
   }
 
   .brand-mark {
@@ -1236,7 +1266,41 @@ summary:focus-visible {
   }
 
   .hero-lockup {
+    max-width: calc(100vw - 2.2rem);
     transform: none;
+    width: 100%;
+  }
+
+  .hero-lockup::before {
+    inset: -2.1rem -1rem -1.75rem;
+  }
+
+  .couple-line {
+    display: grid;
+    font-size: clamp(3.45rem, 15.5vw, 4.8rem);
+    grid-template-columns: minmax(0, auto) minmax(0, auto);
+    justify-content: center;
+    max-width: 100%;
+    padding-bottom: 0.18em;
+    white-space: normal;
+  }
+
+  .couple-name-main {
+    grid-column: 1 / 3;
+    justify-self: center;
+  }
+
+  .couple-name-amp {
+    grid-column: 1;
+    justify-self: end;
+    margin-top: -0.04em;
+  }
+
+  .couple-name-second {
+    grid-column: 2;
+    justify-self: start;
+    margin-left: -0.02em;
+    margin-top: 0.16em;
   }
 
   .hero-dance-image {
@@ -1247,7 +1311,12 @@ summary:focus-visible {
   }
 
   .date-stamp {
-    margin-top: 3rem;
+    gap: 0.95rem;
+    margin-top: 1.2rem;
+  }
+
+  .date-stamp i {
+    width: 1.75rem;
   }
 
   .detail-grid,
@@ -1283,7 +1352,8 @@ summary:focus-visible {
   }
 
   .closing-image {
-    height: 28rem;
+    height: 27rem;
+    margin-bottom: -1.5rem;
   }
 
   .floral-closing {

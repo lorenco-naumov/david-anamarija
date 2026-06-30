@@ -1,27 +1,24 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Great_Vibes, Manrope } from "next/font/google";
 import "./globals.css";
 
 const display = Bodoni_Moda({
   variable: "--font-display",
   subsets: ["latin"],
-  display: "optional",
-  preload: false,
+  display: "swap",
 });
 
 const sans = Manrope({
   variable: "--font-ui",
   subsets: ["latin"],
   display: "swap",
-  preload: false,
 });
 
 const script = Great_Vibes({
   variable: "--font-script",
   subsets: ["latin"],
   weight: "400",
-  display: "optional",
-  preload: false,
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -39,6 +36,15 @@ export const metadata: Metadata = {
     icon: "/icon.svg",
     apple: "/icon.svg",
   },
+  other: {
+    "color-scheme": "light",
+    "supported-color-schemes": "light",
+  },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#f7f1e9",
 };
 
 export default function RootLayout({
