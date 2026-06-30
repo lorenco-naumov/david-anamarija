@@ -1,10 +1,8 @@
 import Image from "next/image";
 import {
   ArrowRight,
-  CalendarDays,
   Car,
   Church,
-  Download,
   GlassWater,
   MapPin,
   Menu,
@@ -14,7 +12,6 @@ import {
 } from "lucide-react";
 import {
   DeferredCountdown,
-  DeferredFaqAccordion,
 } from "@/components/DeferredClientComponents";
 import { MotionController } from "@/components/MotionController";
 import { wedding } from "@/content/wedding";
@@ -24,16 +21,35 @@ export default function Home() {
     <>
       <SiteHeader />
       <main className="invitation-page">
-        <MotionController />
-        <Hero />
-        <WeddingDetails />
-        <CountdownSection />
-        <DayTimeline />
-        <Venue />
-        <Closing />
+        <FloralDecoration placement="top" />
+        <div className="invitation-content">
+          <MotionController />
+          <Hero />
+          <WeddingDetails />
+          <CountdownSection />
+          <DayTimeline />
+          <Venue />
+          <Closing />
+        </div>
+        <FloralDecoration placement="bottom" />
       </main>
       <HashScrollScript />
     </>
+  );
+}
+
+function FloralDecoration({ placement }: { placement: "top" | "bottom" }) {
+  return (
+    <div className={`${placement}-floral-decoration page-floral-decoration`} aria-hidden>
+      <Image
+        alt=""
+        className="page-floral-decoration-image"
+        fill
+        preload
+        sizes="100vw"
+        src="/images/wedding-assets/floral-scroll-crown.png"
+      />
+    </div>
   );
 }
 
@@ -93,61 +109,26 @@ function Hero() {
   return (
     <section className="hero-section invitation-section" id="top">
       <div className="hero-copy" data-reveal>
-        <DecorativeScript word="Love" />
-        <h1 className="display hero-title">
-          A Night to
-          <span>Remember</span>
-        </h1>
-        <Ornament />
-        <p className="couple-line">{wedding.couple.names}</p>
-        <p className="intro-line">
-          Join us in {wedding.venue.city} - {wedding.date.display}
-        </p>
-        <div className="action-row">
-          <a className="dark-button" href="#details">
-            <span>View details</span>
-            <ArrowRight aria-hidden size={24} strokeWidth={1.2} />
-          </a>
-          <a className="light-button" href="#message">
-            Send message
-          </a>
+        <div className="hero-lockup">
+          <h1 className="couple-line" aria-label={wedding.couple.names}>
+            <span className="couple-name-main">Ana Marija</span>
+            <span className="couple-name-amp">&amp;</span>
+            <span className="couple-name-second">David</span>
+          </h1>
+          <DateStamp />
         </div>
-        <DateStamp />
       </div>
 
       <div className="hero-art" aria-hidden data-reveal>
-        <ReferenceImage
-          alt=""
-          className="floral-accent floral-hero"
-          objectClassName="object-flower"
-          preload
-          src={wedding.assetImages.flowerCutoutWide.src}
-        />
-        <ReferenceImage
-          alt=""
-          className="hero-main-image"
-          objectClassName="object-hero-main"
-          preload
-          src={wedding.assetImages.couplePortrait.src}
-        />
-        <ReferenceImage
-          alt=""
-          className="hero-small-image hero-small-top"
-          objectClassName="object-hero-floral"
-          src={wedding.assetImages.bouquetCutout.src}
-        />
-        <ReferenceImage
-          alt=""
-          className="hero-small-image hero-small-mid"
-          objectClassName="object-hero-stone"
-          src={wedding.assetImages.stoneTexture.src}
-        />
-        <ReferenceImage
-          alt=""
-          className="hero-wide-image"
-          objectClassName="object-hero-card"
-          src={wedding.assetImages.invitationCard.src}
-        />
+        <div className="hero-dance-image">
+          <Image
+            alt=""
+            fill
+            preload
+            sizes="(max-width: 1024px) 92vw, 58vw"
+            src="/images/wedding-assets/hero-dance-cutout.png"
+          />
+        </div>
       </div>
     </section>
   );
@@ -165,16 +146,7 @@ function WeddingDetails() {
       <div className="details-copy" data-reveal>
         <DecorativeScript word="Details" />
         <h2 className="display section-title left-title">The Details</h2>
-        <Ornament align="left" />
         <p className="section-body">Everything you need for the evening.</p>
-        <div className="vertical-note">
-          <span aria-hidden />
-          <Sparkles aria-hidden size={18} strokeWidth={1.2} />
-        </div>
-        <a className="text-link" href="#timeline">
-          See full itinerary
-          <ArrowRight aria-hidden size={22} strokeWidth={1.2} />
-        </a>
         <ReferenceImage
           alt=""
           className="details-paper-image"
@@ -216,10 +188,8 @@ function CountdownSection() {
         src={wedding.assetImages.couplePortrait.src}
       />
       <div className="center-copy" data-reveal>
-        <Sparkles aria-hidden className="top-spark" size={18} strokeWidth={1.2} />
         <DecorativeScript word="Forever" />
         <h2 className="display section-title">The celebration begins soon</h2>
-        <Ornament />
       </div>
       <div className="countdown-wrap">
         <DeferredCountdown target={wedding.date.iso} />
@@ -227,14 +197,6 @@ function CountdownSection() {
           Set your calendar for an <em>unforgettable evening</em> in{" "}
           {wedding.venue.city}.
         </p>
-        <a
-          className="light-button calendar-button"
-          href={`data:text/calendar,${encodeURIComponent(calendarFile())}`}
-          download="david-anamarija.ics"
-        >
-          Add to calendar
-          <CalendarDays aria-hidden size={22} strokeWidth={1.2} />
-        </a>
       </div>
     </section>
   );
@@ -258,7 +220,6 @@ function DayTimeline() {
       <div className="center-copy timeline-head" data-reveal>
         <DecorativeScript word="Guide" />
         <h2 className="display section-title">How the evening unfolds</h2>
-        <Ornament />
       </div>
       <ol className="timeline-list" data-reveal-group>
         {wedding.timeline.map((item) => (
@@ -272,9 +233,6 @@ function DayTimeline() {
           </li>
         ))}
       </ol>
-      <p className="timeline-note">
-        Each moment leads to the next, and we cannot wait to share them with you.
-      </p>
       <ReferenceImage
         alt=""
         className="timeline-bottom-image"
@@ -348,35 +306,12 @@ function Closing() {
         <h2 className="display section-title left-title">Celebrate with us</h2>
         <Ornament />
         <p className="section-body">We would love to share this night with you.</p>
-        <div className="action-row closing-actions">
-          <a className="dark-button" href="#message">
-            <span>Send message</span>
-            <ArrowRight aria-hidden size={24} strokeWidth={1.2} />
-          </a>
-          <a
-            className="light-button"
-            href={`data:text/plain,${encodeURIComponent(invitationText())}`}
-            download="david-anamarija-invitation.txt"
-          >
-            <Download aria-hidden size={20} strokeWidth={1.2} />
-            Download invitation
-          </a>
-        </div>
         <p className="answer-note" id="message">
           Tell us your answer by {wedding.rsvp.deadline}.
         </p>
-        <div className="faq-panel">
-          <h3>FAQ</h3>
-          <span className="small-rule" aria-hidden />
-          <DeferredFaqAccordion items={wedding.faq} />
-        </div>
         <footer className="closing-signature">
           <p className="script-text">With love,</p>
-          <a className="footer-brand" href="#top" aria-label="Back to top">
-            D <span>|</span> A
-          </a>
-          <p>{wedding.couple.names}</p>
-          <Ornament align="left" />
+          <p>Jovovikj &amp; Bozinovi</p>
         </footer>
       </div>
 
@@ -386,12 +321,6 @@ function Closing() {
         objectClassName="object-closing"
         src={wedding.assetImages.thankYouCard.src}
       />
-
-      <p className="bottom-note">
-        <Sparkles aria-hidden size={16} strokeWidth={1.2} />
-        We can&apos;t wait to celebrate with you
-        <Sparkles aria-hidden size={16} strokeWidth={1.2} />
-      </p>
     </section>
   );
 }
@@ -399,8 +328,8 @@ function Closing() {
 function SiteHeader() {
   return (
     <header className="site-header" aria-label="Wedding navigation">
-      <a className="brand-mark nav-brand" href="#top" aria-label="David and Anamarija">
-        D <span>|</span> A
+      <a className="brand-mark nav-brand" href="#top" aria-label="Ana Marija and David">
+        A <span>|</span> D
       </a>
       <details className="nav-menu">
         <summary aria-label="Open menu">
@@ -441,7 +370,7 @@ function ReferenceImage({
         alt={alt}
         className={objectClassName}
         fill
-        loading={preload ? undefined : loading}
+        loading={preload ? "eager" : loading}
         preload={preload}
         sizes="(max-width: 768px) 92vw, (max-width: 1280px) 48vw, 42vw"
         src={src}
@@ -496,33 +425,4 @@ function DetailIcon({ type }: { type: string }) {
   }
 
   return <Shirt {...props} />;
-}
-
-function calendarFile() {
-  return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//David Anamarija Wedding//Invitation//EN",
-    "BEGIN:VEVENT",
-    "UID:david-anamarija-20270914@invitation",
-    "DTSTAMP:20260627T000000Z",
-    "DTSTART:20270914T143000Z",
-    "DTEND:20270914T220000Z",
-    `SUMMARY:${wedding.couple.names} Wedding`,
-    `LOCATION:${wedding.venue.name}, ${wedding.venue.city}`,
-    `DESCRIPTION:Wedding celebration for ${wedding.couple.names}.`,
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-}
-
-function invitationText() {
-  return [
-    `${wedding.couple.names} wedding invitation`,
-    `${wedding.date.display}`,
-    `${wedding.venue.name}, ${wedding.venue.city}`,
-    `Ceremony: ${wedding.details[0].description}`,
-    `Reception: ${wedding.details[1].description}`,
-    `Please send your answer by ${wedding.rsvp.deadline}.`,
-  ].join("\n");
 }

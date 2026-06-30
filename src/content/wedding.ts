@@ -1,15 +1,15 @@
 export const wedding = {
   couple: {
-    names: "David & Anamarija",
+    names: "Ana Marija & David",
     initials: "D & A",
   },
   date: {
-    iso: "2027-09-14T16:30:00+02:00",
-    display: "14 September 2027",
-    numericLabel: "14 / 09 / 27",
-    day: "14",
+    iso: "2026-09-19T16:30:00+02:00",
+    display: "19 September 2026",
+    numericLabel: "19 / 09 / 26",
+    day: "19",
     month: "09",
-    yearShort: "27",
+    yearShort: "26",
   },
   venue: {
     name: "Garden Ballroom, Skopje",
