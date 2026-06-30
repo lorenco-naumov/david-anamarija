@@ -304,14 +304,13 @@ function Closing() {
       <div className="closing-copy" data-reveal>
         <DecorativeScript word="Celebrate" />
         <h2 className="display section-title left-title">Celebrate with us</h2>
-        <Ornament />
         <p className="section-body">We would love to share this night with you.</p>
         <p className="answer-note" id="message">
           Tell us your answer by {wedding.rsvp.deadline}.
         </p>
         <footer className="closing-signature">
-          <p className="script-text">With love,</p>
-          <p>Jovovikj &amp; Bozinovi</p>
+          <p className="script-text">With love</p>
+          <p>Jovovikj &amp; Bozhinovi</p>
         </footer>
       </div>
 
