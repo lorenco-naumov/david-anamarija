@@ -159,6 +159,15 @@ summary:focus-visible {
   margin-top: clamp(5.5rem, 8vw, 8.5rem);
 }
 
+.hero-section + .details-section {
+  margin-top: clamp(18rem, 20vw, 24rem);
+}
+
+.countdown-section + .timeline-section,
+.timeline-section + .venue-section {
+  margin-top: clamp(2.75rem, 3.25vw, 4rem);
+}
+
 .display {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 520;
@@ -166,22 +175,9 @@ summary:focus-visible {
   line-height: 0.94;
 }
 
-.script-text,
-.decorative-script {
+.script-text {
   font-family: var(--font-script), "Brush Script MT", cursive;
   letter-spacing: 0;
-}
-
-.decorative-script {
-  color: rgba(169, 133, 93, 0.12);
-  font-size: 12rem;
-  left: -2rem;
-  line-height: 0.8;
-  pointer-events: none;
-  position: absolute;
-  top: 13rem;
-  transform: rotate(-5deg);
-  z-index: -1;
 }
 
 .small-rule {
@@ -193,7 +189,10 @@ summary:focus-visible {
 }
 
 .section-title {
+  font-family: var(--font-script), "Brush Script MT", cursive;
   font-size: 5.7rem;
+  font-weight: 400;
+  line-height: 0.9;
   margin: 1.8rem auto 0;
   max-width: 47rem;
   text-align: center;
@@ -360,29 +359,6 @@ summary:focus-visible {
   transform: translateY(1px);
 }
 
-.reference-image {
-  background: var(--paper-deep);
-  overflow: hidden;
-  position: relative;
-}
-
-.reference-image img {
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
-.floral-accent {
-  background: transparent;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-}
-
-.object-flower {
-  object-fit: contain !important;
-}
-
 .hero-section {
   display: grid;
   grid-template-columns: 42.5% 57.5%;
@@ -531,24 +507,10 @@ summary:focus-visible {
   padding: 7.5rem 6.2rem 4.875rem 8.9rem;
 }
 
-.floral-details {
-  height: 28rem;
-  opacity: 0.48;
-  right: -7rem;
-  top: 4.1rem;
-  transform: rotate(-10deg);
-  width: 33rem;
-}
-
 .details-copy {
   padding-top: 9.5rem;
   position: relative;
   z-index: 2;
-}
-
-.details-copy .decorative-script {
-  left: -4.4rem;
-  top: 9rem;
 }
 
 .details-copy .section-body {
@@ -626,16 +588,8 @@ summary:focus-visible {
 }
 
 .countdown-section {
-  padding: 6.7rem 9rem 5.9rem;
-}
-
-.floral-countdown {
-  height: 42rem;
-  opacity: 0.22;
-  right: -15rem;
-  top: 6rem;
-  transform: rotate(-12deg);
-  width: 42rem;
+  min-height: auto;
+  padding: clamp(4.5rem, 5vw, 5.5rem) 9rem clamp(4.75rem, 5vw, 5.75rem);
 }
 
 .center-copy {
@@ -648,12 +602,6 @@ summary:focus-visible {
 
 .center-copy .small-rule {
   margin-inline: auto;
-}
-
-.center-copy .decorative-script {
-  left: 50%;
-  top: 4.5rem;
-  transform: translateX(-50%) rotate(-5deg);
 }
 
 .countdown-side-image {
@@ -675,12 +623,12 @@ summary:focus-visible {
   margin: 2.1rem auto 0;
   max-width: 49rem;
   position: relative;
-  transform: translate(8.5rem, 6.5rem);
+  transform: none;
   z-index: 3;
 }
 
 .countdown-section .center-copy {
-  transform: translate(8.5rem, 10rem);
+  transform: none;
 }
 
 .countdown-grid {
@@ -733,16 +681,8 @@ summary:focus-visible {
 }
 
 .timeline-section {
-  padding: 12rem 8.2rem 4rem;
-}
-
-.floral-timeline {
-  bottom: 6.2rem;
-  height: 22rem;
-  left: -7rem;
-  opacity: 0.42;
-  transform: rotate(16deg);
-  width: 26rem;
+  min-height: auto;
+  padding: clamp(4.75rem, 5.2vw, 5.5rem) 8.2rem clamp(4.5rem, 5vw, 5.25rem);
 }
 
 .timeline-head {
@@ -768,7 +708,7 @@ summary:focus-visible {
   gap: 0;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   list-style: none;
-  margin: 5.1rem auto 0;
+  margin: clamp(3.5rem, 4vw, 4.25rem) auto 0;
   max-width: 82rem;
   padding: 0;
   position: relative;
@@ -847,35 +787,24 @@ summary:focus-visible {
 
 .venue-section {
   display: grid;
-  grid-template-columns: 47% 53%;
-  padding-left: 7.4rem;
-}
-
-.floral-venue {
-  height: 28rem;
-  left: 3.5rem;
-  opacity: 0.2;
-  top: 10rem;
-  transform: rotate(8deg);
-  width: 31rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  min-height: auto;
+  padding: clamp(4.75rem, 5vw, 5rem) 6.2rem clamp(5rem, 5.5vw, 5.5rem);
 }
 
 .venue-copy {
   align-self: center;
-  padding-right: 4rem;
+  max-width: 46rem;
+  padding-right: 0;
   position: relative;
   text-align: center;
-  transform: translateY(4.5rem);
+  transform: none;
   z-index: 2;
 }
 
 .venue-copy .small-rule {
   margin-inline: auto;
-}
-
-.venue-copy .decorative-script {
-  left: -5rem;
-  top: 9.4rem;
 }
 
 .venue-copy .section-title {
@@ -938,32 +867,18 @@ summary:focus-visible {
 
 .closing-section {
   display: grid;
-  grid-template-columns: 52% 48%;
-  padding: 4.5rem 0 2rem 9.6rem;
-}
-
-.floral-closing {
-  bottom: 4rem;
-  height: 25rem;
-  left: 46%;
-  opacity: 0.44;
-  transform: translateX(-50%) rotate(-8deg);
-  width: 29rem;
-  z-index: 2;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding: 4.5rem 1.5rem 8rem;
 }
 
 .closing-copy {
-  align-self: start;
+  align-self: center;
   max-width: 33rem;
   padding-top: 0.1rem;
   position: relative;
   transform: translateY(2.2rem);
   z-index: 3;
-}
-
-.closing-copy .decorative-script {
-  left: -7rem;
-  top: 3.7rem;
 }
 
 .closing-copy .section-title {
@@ -1041,6 +956,15 @@ summary:focus-visible {
 
   .invitation-section + .invitation-section {
     margin-top: 5rem;
+  }
+
+  .hero-section + .details-section {
+    margin-top: 8rem;
+  }
+
+  .countdown-section + .timeline-section,
+  .timeline-section + .venue-section {
+    margin-top: 3rem;
   }
 
   .section-title {
@@ -1134,11 +1058,7 @@ summary:focus-visible {
 
   .countdown-side-image,
   .timeline-top-image,
-  .timeline-bottom-image,
-  .floral-details,
-  .floral-countdown,
-  .floral-timeline,
-  .floral-venue {
+  .timeline-bottom-image {
     display: none;
   }
 
@@ -1211,8 +1131,8 @@ summary:focus-visible {
     margin-top: 2.5rem;
   }
 
-  .decorative-script {
-    font-size: 6rem;
+  .hero-section + .details-section {
+    margin-top: 3.5rem;
   }
 
   .section-title,
@@ -1413,14 +1333,6 @@ summary:focus-visible {
 
   .closing-signature p:not(.script-text) {
     font-size: clamp(1.3rem, 6.7vw, 1.8125rem);
-  }
-
-  .floral-closing {
-    height: 15rem;
-    left: auto;
-    opacity: 0.42;
-    right: -7rem;
-    width: 17rem;
   }
 
 }

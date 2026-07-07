@@ -137,22 +137,9 @@ function Hero() {
 function WeddingDetails() {
   return (
     <section className="details-section invitation-section" id="details">
-      <ReferenceImage
-        alt=""
-        className="floral-accent floral-details"
-        objectClassName="object-flower"
-        src={wedding.assetImages.flowerCutoutSoft.src}
-      />
       <div className="details-copy" data-reveal>
-        <DecorativeScript word="Details" />
         <h2 className="display section-title left-title">The Details</h2>
         <p className="section-body">Everything you need for the evening.</p>
-        <ReferenceImage
-          alt=""
-          className="details-paper-image"
-          objectClassName="object-details-paper"
-          src={wedding.assetImages.waxSeal.src}
-        />
       </div>
 
       <div className="detail-grid" data-reveal-group>
@@ -175,20 +162,7 @@ function WeddingDetails() {
 function CountdownSection() {
   return (
     <section className="countdown-section invitation-section" id="countdown">
-      <ReferenceImage
-        alt=""
-        className="floral-accent floral-countdown"
-        objectClassName="object-flower"
-        src={wedding.assetImages.flowerCutoutWide.src}
-      />
-      <ReferenceImage
-        alt=""
-        className="countdown-side-image"
-        objectClassName="object-countdown-couple"
-        src={wedding.assetImages.couplePortrait.src}
-      />
       <div className="center-copy" data-reveal>
-        <DecorativeScript word="Forever" />
         <h2 className="display section-title">The celebration begins soon</h2>
       </div>
       <div className="countdown-wrap">
@@ -205,20 +179,7 @@ function CountdownSection() {
 function DayTimeline() {
   return (
     <section className="timeline-section invitation-section" id="timeline">
-      <ReferenceImage
-        alt=""
-        className="floral-accent floral-timeline"
-        objectClassName="object-flower"
-        src={wedding.assetImages.bouquetCutout.src}
-      />
-      <ReferenceImage
-        alt=""
-        className="timeline-top-image"
-        objectClassName="object-timeline-top"
-        src={wedding.assetImages.venueTerrace.src}
-      />
       <div className="center-copy timeline-head" data-reveal>
-        <DecorativeScript word="Guide" />
         <h2 className="display section-title">How the evening unfolds</h2>
       </div>
       <ol className="timeline-list" data-reveal-group>
@@ -233,12 +194,6 @@ function DayTimeline() {
           </li>
         ))}
       </ol>
-      <ReferenceImage
-        alt=""
-        className="timeline-bottom-image"
-        objectClassName="object-timeline-bottom"
-        src={wedding.assetImages.champagneCoupes.src}
-      />
     </section>
   );
 }
@@ -246,14 +201,7 @@ function DayTimeline() {
 function Venue() {
   return (
     <section className="venue-section invitation-section" id="venue">
-      <ReferenceImage
-        alt=""
-        className="floral-accent floral-venue"
-        objectClassName="object-flower"
-        src={wedding.assetImages.flowerCutoutSoft.src}
-      />
       <div className="venue-copy" data-reveal>
-        <DecorativeScript word="Place" />
         <h2 className="display section-title">
           An evening in the heart of Skopje
         </h2>
@@ -282,12 +230,6 @@ function Venue() {
           <ArrowRight aria-hidden size={24} strokeWidth={1.2} />
         </a>
       </div>
-      <ReferenceImage
-        alt={wedding.assetImages.venueTerrace.alt}
-        className="venue-image"
-        objectClassName="object-venue"
-        src={wedding.assetImages.venueTerrace.src}
-      />
     </section>
   );
 }
@@ -295,14 +237,7 @@ function Venue() {
 function Closing() {
   return (
     <section className="closing-section invitation-section" id="closing">
-      <ReferenceImage
-        alt=""
-        className="floral-accent floral-closing"
-        objectClassName="object-flower"
-        src={wedding.assetImages.bouquetCutout.src}
-      />
       <div className="closing-copy" data-reveal>
-        <DecorativeScript word="Celebrate" />
         <h2 className="display section-title left-title">Celebrate with us</h2>
         <p className="section-body">We would love to share this night with you.</p>
         <p className="answer-note" id="message">
@@ -313,13 +248,6 @@ function Closing() {
           <p>Jovovikj &amp; Bozhinovi</p>
         </footer>
       </div>
-
-      <ReferenceImage
-        alt=""
-        className="closing-image"
-        objectClassName="object-closing"
-        src={wedding.assetImages.thankYouCard.src}
-      />
     </section>
   );
 }
@@ -348,36 +276,6 @@ function SiteHeader() {
   );
 }
 
-function ReferenceImage({
-  alt,
-  className,
-  loading = "lazy",
-  objectClassName,
-  preload = false,
-  src,
-}: {
-  alt: string;
-  className: string;
-  loading?: "eager" | "lazy";
-  objectClassName: string;
-  preload?: boolean;
-  src: string;
-}) {
-  return (
-    <div className={`reference-image ${className}`}>
-      <Image
-        alt={alt}
-        className={objectClassName}
-        fill
-        loading={preload ? "eager" : loading}
-        preload={preload}
-        sizes="(max-width: 768px) 92vw, (max-width: 1280px) 48vw, 42vw"
-        src={src}
-      />
-    </div>
-  );
-}
-
 function Ornament({ align = "center" }: { align?: "center" | "left" }) {
   return (
     <div className={`ornament ornament-${align}`} aria-hidden>
@@ -385,14 +283,6 @@ function Ornament({ align = "center" }: { align?: "center" | "left" }) {
       <Sparkles size={22} strokeWidth={1.1} />
       <span />
     </div>
-  );
-}
-
-function DecorativeScript({ word }: { word: string }) {
-  return (
-    <span className="decorative-script" aria-hidden>
-      {word}
-    </span>
   );
 }
 
