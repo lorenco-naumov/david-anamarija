@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   keywords: ["David", "Anamarija", "wedding", "Skopje", "invitation"],
   openGraph: {
     title: "David & Anamarija",
-    description: "19 September 2026 at Garden Ballroom, Skopje.",
+    description: "19 September 2026 at La Tana Wedding, Kamnik Complex.",
     type: "website",
   },
   icons: {

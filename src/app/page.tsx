@@ -1,8 +1,10 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import {
   ArrowRight,
   Car,
   Church,
+  ClipboardSignature,
   GlassWater,
   MapPin,
   Menu,
@@ -143,17 +145,40 @@ function WeddingDetails() {
       </div>
 
       <div className="detail-grid" data-reveal-group>
-        {wedding.details.map((detail, index) => (
-          <article className="detail-card" data-reveal-child key={detail.title}>
-            <p className="card-number">{String(index + 1).padStart(2, "0")}</p>
-            <span className="icon-medallion">
-              <DetailIcon type={detail.icon} />
-            </span>
-            <span className="small-rule" aria-hidden />
-            <h3 className="display">{detail.title}</h3>
-            <p>{detail.description}</p>
-          </article>
-        ))}
+        {wedding.details.map((detail, index) => {
+          const cardContent = (
+            <>
+              <p className="card-number">{String(index + 1).padStart(2, "0")}</p>
+              <span className="icon-medallion">
+                <DetailIcon type={detail.icon} />
+              </span>
+              <span className="small-rule" aria-hidden />
+              <h3 className="display">{detail.title}</h3>
+              <p>{detail.description}</p>
+            </>
+          );
+
+          if ("mapUrl" in detail) {
+            return (
+              <a
+                className="detail-card detail-card-link"
+                data-reveal-child
+                href={detail.mapUrl}
+                key={detail.title}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {cardContent}
+              </a>
+            );
+          }
+
+          return (
+            <article className="detail-card" data-reveal-child key={detail.title}>
+              {cardContent}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -182,7 +207,11 @@ function DayTimeline() {
       <div className="center-copy timeline-head" data-reveal>
         <h2 className="display section-title">How the evening unfolds</h2>
       </div>
-      <ol className="timeline-list" data-reveal-group>
+      <ol
+        className="timeline-list"
+        data-reveal-group
+        style={{ "--timeline-count": wedding.timeline.length } as CSSProperties}
+      >
         {wedding.timeline.map((item) => (
           <li data-reveal-child key={`${item.time}-${item.label}`}>
             <time>{item.time}</time>
@@ -206,29 +235,34 @@ function Venue() {
           An evening in the heart of Skopje
         </h2>
         <Ornament />
-        <p className="section-body">
-          Arrive, unwind, and celebrate with us at a place where timeless
-          elegance meets unforgettable views.
-        </p>
-        <article className="venue-card">
-          <MapPin aria-hidden size={66} strokeWidth={1} />
-          <div>
-            <h3>{wedding.venue.name}</h3>
-            <p>{wedding.venue.address}</p>
-          </div>
-          <span className="card-line" />
-          <Car aria-hidden size={28} strokeWidth={1.2} />
-          <p>{wedding.venue.parking}</p>
-        </article>
-        <a
-          className="dark-button directions-button"
-          href={wedding.venue.mapUrl}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <span>Open directions</span>
-          <ArrowRight aria-hidden size={24} strokeWidth={1.2} />
-        </a>
+        <p className="section-body">{wedding.venue.arrival}</p>
+        <div className="venue-card-grid">
+          {wedding.venue.locations.map((location) => (
+            <article className="venue-card" key={location.label}>
+              <MapPin aria-hidden size={52} strokeWidth={1} />
+              <div>
+                <span className="venue-location-label">{location.label}</span>
+                <h3>{location.name}</h3>
+                <p>{location.address}</p>
+                {"note" in location ? (
+                  <p className="venue-location-note">
+                    <Car aria-hidden size={18} strokeWidth={1.3} />
+                    {location.note}
+                  </p>
+                ) : null}
+              </div>
+              <a
+                className="dark-button venue-card-button"
+                href={location.mapUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>{location.buttonLabel}</span>
+                <ArrowRight aria-hidden size={20} strokeWidth={1.2} />
+              </a>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -303,6 +337,10 @@ function DetailIcon({ type }: { type: string }) {
 
   if (type === "ceremony") {
     return <Church {...props} />;
+  }
+
+  if (type === "registry") {
+    return <ClipboardSignature {...props} />;
   }
 
   if (type === "reception") {

@@ -544,9 +544,22 @@ summary:focus-visible {
   border: 1px solid rgba(169, 133, 93, 0.16);
   border-radius: 8px;
   box-shadow: 0 1.6rem 3rem rgba(61, 42, 25, 0.08);
+  color: inherit;
   min-height: 22.8rem;
   padding: 3.1rem 2.3rem;
   text-align: center;
+  text-decoration: none;
+}
+
+.detail-card-link {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.detail-card-link:hover {
+  border-color: rgba(169, 133, 93, 0.34);
+  box-shadow: 0 1.8rem 3.2rem rgba(61, 42, 25, 0.12);
 }
 
 .card-number {
@@ -704,12 +717,13 @@ summary:focus-visible {
 }
 
 .timeline-list {
+  --timeline-count: 5;
   display: grid;
   gap: 0;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--timeline-count), minmax(0, 1fr));
   list-style: none;
   margin: clamp(3.5rem, 4vw, 4.25rem) auto 0;
-  max-width: 82rem;
+  max-width: min(82rem, calc(var(--timeline-count) * 18rem));
   padding: 0;
   position: relative;
   z-index: 2;
@@ -812,6 +826,14 @@ summary:focus-visible {
   max-width: 40rem;
 }
 
+.venue-card-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 3.4rem auto 0;
+  max-width: 52rem;
+}
+
 .venue-card {
   align-items: center;
   background: rgba(255, 253, 248, 0.66);
@@ -819,11 +841,21 @@ summary:focus-visible {
   color: var(--gold);
   display: grid;
   gap: 1.3rem;
-  grid-template-columns: 6.5rem 1fr;
-  margin: 3.4rem auto 0;
-  max-width: 34rem;
+  grid-template-columns: 4.4rem 1fr;
+  margin: 0;
+  max-width: none;
   padding: 2rem 2.1rem;
   text-align: left;
+}
+
+.venue-location-label {
+  color: var(--gold);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
 }
 
 .venue-card h3 {
@@ -843,14 +875,17 @@ summary:focus-visible {
   margin: 0;
 }
 
-.card-line {
-  background: var(--line);
-  grid-column: 1 / -1;
-  height: 1px;
+.venue-location-note {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 1rem !important;
 }
 
-.directions-button {
-  margin-top: 2rem;
+.venue-card-button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 0.35rem;
 }
 
 .venue-image {
@@ -1307,8 +1342,16 @@ summary:focus-visible {
     text-align: center;
   }
 
+  .venue-card-grid {
+    grid-template-columns: 1fr;
+  }
+
   .venue-card svg {
     margin-inline: auto;
+  }
+
+  .venue-card-button {
+    justify-self: stretch;
   }
 
   .closing-copy .section-title,

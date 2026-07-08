@@ -1,10 +1,16 @@
+const churchMapUrl =
+  "https://www.google.com/maps/place/St.+Michael+the+Archangel+Orthodox+Church+-+Avtokomanda/@42.0021333,21.4571659,17z/data=!3m1!4b1!4m6!3m5!1s0x1354159e9c2d66d9:0x6b3fe18dc166936b!8m2!3d42.0021333!4d21.4571659!16s%2Fg%2F11dfr3vxn_?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D";
+
+const restaurantMapUrl =
+  "https://www.google.com/maps/place/La+Tana+Wedding+Restaurant/@42.0085884,21.4846808,17z/data=!3m1!4b1!4m6!3m5!1s0x13543fd050ca8765:0x30f12c17631d5839!8m2!3d42.0085884!4d21.4846808!16s%2Fg%2F11dyq_gf4k?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D";
+
 export const wedding = {
   couple: {
     names: "Ana Marija & David",
     initials: "D & A",
   },
   date: {
-    iso: "2026-09-19T16:30:00+02:00",
+    iso: "2026-09-19T15:30:00+02:00",
     display: "19 September 2026",
     numericLabel: "19 / 09 / 26",
     day: "19",
@@ -12,55 +18,78 @@ export const wedding = {
     yearShort: "26",
   },
   venue: {
-    name: "Garden Ballroom, Skopje",
+    name: "La Tana Wedding",
     city: "Skopje",
-    location: "Skopje, North Macedonia",
-    address: "Str. 16-ta Makedonska Brigada 18, Skopje 1000, North Macedonia",
+    location: "Kamnik Complex, Skopje",
+    address: "Venue Kamnik Complex, Skopje",
     arrival:
-      "Arrive, unwind, and celebrate with us at a place where timeless elegance meets unforgettable views.",
-    parking: "Valet and guest parking available",
-    travel: "Guest parking and valet service will be available at the venue.",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Garden%20Ballroom%20Skopje",
+      "The day begins at St. Archangel Michael in Avtokomanda, then continues at La Tana Wedding in Kamnik Complex.",
+    parking: "Guest parking available at Kamnik Complex",
+    travel: "Guest parking will be available at the venue.",
+    mapUrl: restaurantMapUrl,
+    locations: [
+      {
+        label: "Church",
+        name: 'Church "St. Archangel Michael"',
+        address: "Avtokomanda, Skopje",
+        buttonLabel: "Open church directions",
+        mapUrl: churchMapUrl,
+      },
+      {
+        label: "Registry & Reception",
+        name: "La Tana Wedding",
+        address: "Venue Kamnik Complex, Skopje",
+        buttonLabel: "Open reception directions",
+        note: "Guest parking available at Kamnik Complex",
+        mapUrl: restaurantMapUrl,
+      },
+    ],
   },
   rsvp: {
     deadline: "1 August 2027",
   },
   details: [
     {
-      title: "Ceremony",
-      description: "St. Sophia Chapel - 16:30",
+      title: "Church",
+      description:
+        '3:30 PM - Church "St. Archangel Michael", Avtokomanda',
       icon: "ceremony",
+      mapUrl: churchMapUrl,
     },
     {
-      title: "Reception",
-      description: "Garden Ballroom - 19:00",
+      title: "Marriage Registry",
+      description: "6:30 PM - La Tana restaurant, Skopje",
+      icon: "registry",
+      mapUrl: restaurantMapUrl,
+    },
+    {
+      title: "Reception of Guests",
+      description: "7:00 PM - La Tana Wedding, Kamnik Complex",
       icon: "reception",
+      mapUrl: restaurantMapUrl,
     },
     {
-      title: "Dress Code",
-      description: "Black Tie / Evening Elegance",
-      icon: "dress",
-    },
-    {
-      title: "Notes",
-      description: "Dinner, music, and dancing to follow",
+      title: "Note",
+      description:
+        "Marriage registry takes place immediately before guest reception at La Tana Wedding.",
       icon: "music",
     },
   ],
   timeline: [
-    { time: "16:30", label: "Ceremony", description: "We say I do." },
     {
-      time: "17:30",
-      label: "Aperitif",
-      description: "Cocktails, canapes and conversation.",
+      time: "3:30 PM",
+      label: "Church",
+      description: 'St. Archangel Michael, Avtokomanda.',
     },
-    { time: "19:00", label: "Dinner", description: "A curated menu and fine wine." },
-    { time: "21:00", label: "First Dance", description: "One song, a lifetime to go." },
     {
-      time: "Late Night",
-      label: "Celebration",
-      description: "Dancing, laughter and unforgettable memories.",
+      time: "6:30 PM",
+      label: "Marriage Registry",
+      description: "As part of La Tana restaurant, Skopje.",
+    },
+    {
+      time: "7:00 PM",
+      label: "Reception of Guests",
+      description: "La Tana Wedding, Kamnik Complex.",
     },
   ],
   faq: [
