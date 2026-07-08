@@ -872,7 +872,69 @@ summary:focus-visible {
   grid-template-columns: 1fr;
   justify-items: center;
   min-height: auto;
-  padding: clamp(4.75rem, 5vw, 5rem) 6.2rem clamp(5rem, 5.5vw, 5.5rem);
+  overflow: visible;
+  padding: clamp(4.75rem, 5vw, 5rem) 6.2rem clamp(23rem, 28vw, 31rem);
+}
+
+.venue-section::before {
+  z-index: 0;
+}
+
+.venue-section::after {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(247, 241, 233, 0.92) 0%,
+      rgba(247, 241, 233, 0.22) 20%,
+      rgba(247, 241, 233, 0) 48%,
+      rgba(247, 241, 233, 0.58) 100%
+    ),
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 253, 248, 0.18) 0%,
+      rgba(255, 253, 248, 0.08) 42%,
+      rgba(247, 241, 233, 0.54) 100%
+    ),
+    url("/images/wedding-assets/church-and-latana.png");
+  background-position:
+    center,
+    center,
+    center bottom;
+  background-repeat: no-repeat;
+  background-size:
+    cover,
+    cover,
+    min(100vw, 118rem) auto;
+  bottom: clamp(1rem, 2vw, 2rem);
+  content: "";
+  height: clamp(20rem, 34vw, 38rem);
+  left: 50%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.38) 18%,
+    #000 34%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.38) 18%,
+    #000 34%,
+    #000 88%,
+    transparent 100%
+  );
+  opacity: 0.88;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: 1;
+}
+
+.venue-section > * {
+  z-index: 2;
 }
 
 .venue-copy {
@@ -1074,6 +1136,7 @@ summary:focus-visible {
   .venue-section {
     --canvas-bleed-top: 3rem;
     --canvas-feather-top: 2.75rem;
+    padding-bottom: clamp(18rem, 30vw, 24rem);
   }
 
   .closing-section {
@@ -1137,6 +1200,10 @@ summary:focus-visible {
     display: grid;
     grid-template-columns: 1fr;
     padding: 6rem 1.5rem 4rem;
+  }
+
+  .venue-section {
+    padding-bottom: clamp(17rem, 38vw, 24rem);
   }
 
   .hero-art,
@@ -1553,6 +1620,19 @@ summary:focus-visible {
   .venue-card-grid {
     max-width: 22rem;
     grid-template-columns: 1fr;
+  }
+
+  .venue-section {
+    padding-bottom: clamp(14rem, 58vw, 19rem);
+  }
+
+  .venue-section::after {
+    background-size:
+      cover,
+      cover,
+      auto 100%;
+    height: clamp(13rem, 58vw, 19rem);
+    opacity: 0.84;
   }
 
   .venue-card-button {
