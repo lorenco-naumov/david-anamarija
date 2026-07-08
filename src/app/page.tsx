@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import {
   ArrowRight,
-  Car,
   Church,
   ClipboardSignature,
   GlassWater,
@@ -16,6 +15,7 @@ import {
   DeferredCountdown,
 } from "@/components/DeferredClientComponents";
 import { MotionController } from "@/components/MotionController";
+import { WeddingDetailCard, WeddingVenueCard } from "@/components/WeddingDetailCard";
 import { wedding } from "@/content/wedding";
 
 export default function Home() {
@@ -146,37 +146,22 @@ function WeddingDetails() {
 
       <div className="detail-grid" data-reveal-group>
         {wedding.details.map((detail, index) => {
-          const cardContent = (
-            <>
-              <p className="card-number">{String(index + 1).padStart(2, "0")}</p>
-              <span className="icon-medallion">
-                <DetailIcon type={detail.icon} />
-              </span>
-              <span className="small-rule" aria-hidden />
-              <h3 className="display">{detail.title}</h3>
-              <p>{detail.description}</p>
-            </>
-          );
-
-          if ("mapUrl" in detail) {
-            return (
-              <a
-                className="detail-card detail-card-link"
-                data-reveal-child
-                href={detail.mapUrl}
-                key={detail.title}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {cardContent}
-              </a>
-            );
-          }
-
           return (
-            <article className="detail-card" data-reveal-child key={detail.title}>
-              {cardContent}
-            </article>
+            <WeddingDetailCard
+              aria-label={
+                "mapUrl" in detail ? `Open ${detail.title} directions` : undefined
+              }
+              data-reveal-child
+              href={"mapUrl" in detail ? detail.mapUrl : undefined}
+              icon={<DetailIcon type={detail.icon} />}
+              key={detail.title}
+              location={"location" in detail ? detail.location : undefined}
+              note={"note" in detail ? detail.note : undefined}
+              number={index + 1}
+              target={"mapUrl" in detail ? "_blank" : undefined}
+              time={"time" in detail ? detail.time : undefined}
+              title={detail.title}
+            />
           );
         })}
       </div>
@@ -236,31 +221,29 @@ function Venue() {
         </h2>
         <Ornament />
         <p className="section-body">{wedding.venue.arrival}</p>
-        <div className="venue-card-grid">
+        <div className="venue-card-grid" data-reveal-group>
           {wedding.venue.locations.map((location) => (
-            <article className="venue-card" key={location.label}>
-              <MapPin aria-hidden size={52} strokeWidth={1} />
-              <div>
-                <span className="venue-location-label">{location.label}</span>
-                <h3>{location.name}</h3>
-                <p>{location.address}</p>
-                {"note" in location ? (
-                  <p className="venue-location-note">
-                    <Car aria-hidden size={18} strokeWidth={1.3} />
-                    {location.note}
-                  </p>
-                ) : null}
-              </div>
-              <a
-                className="dark-button venue-card-button"
-                href={location.mapUrl}
-                rel="noreferrer"
-                target="_blank"
-              >
-                <span>{location.buttonLabel}</span>
-                <ArrowRight aria-hidden size={20} strokeWidth={1.2} />
-              </a>
-            </article>
+            <WeddingVenueCard
+              action={
+                <a
+                  className="dark-button venue-card-button"
+                  href={location.mapUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <span>{location.buttonLabel}</span>
+                  <ArrowRight aria-hidden size={20} strokeWidth={1.2} />
+                </a>
+              }
+              address={location.address}
+              className="venue-station-card"
+              data-reveal-child
+              icon={<MapPin aria-hidden size={52} strokeWidth={1} />}
+              key={location.label}
+              label={location.label}
+              note={"note" in location ? location.note : undefined}
+              title={location.name}
+            />
           ))}
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { WeddingCountdownCard } from "./WeddingDetailCard";
 
 function getCountdown(target: string) {
   const diff = Math.max(0, new Date(target).getTime() - Date.now());
@@ -47,10 +48,13 @@ export function Countdown({ target }: { target: string }) {
       data-reveal-group
     >
       {values.map((item) => (
-        <div className="countdown-unit" data-reveal-child key={item.label}>
-          <span className="countdown-value">{pad(item.value)}</span>
-          <span className="label">{item.label}</span>
-        </div>
+        <WeddingCountdownCard
+          className="countdown-card"
+          data-reveal-child
+          key={item.label}
+          label={item.label}
+          value={pad(item.value)}
+        />
       ))}
     </div>
   );

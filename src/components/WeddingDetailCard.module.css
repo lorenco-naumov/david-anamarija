@@ -1,0 +1,718 @@
+.card {
+  color: inherit;
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.shell {
+  --wedding-card-bg: #fbf4e8;
+  --wedding-card-bg-soft: #fffaf1;
+  --wedding-card-paper-warm: #f4ead8;
+  --wedding-card-ink: #594431;
+  --wedding-card-muted: #7a6d60;
+  --wedding-card-gold: #b6935f;
+  --wedding-card-border: rgba(184, 147, 96, 0.72);
+  --wedding-card-border-soft: rgba(219, 199, 162, 0.5);
+  --wedding-card-floral-opacity: 0.84;
+  --wedding-card-shadow: rgba(58, 38, 20, 0.16);
+  --wedding-card-notch: clamp(1.2rem, 8%, 2.35rem);
+  --wedding-card-padding: clamp(1.25rem, 8%, 2.4rem);
+  aspect-ratio: 3 / 4;
+  container-type: inline-size;
+  filter:
+    drop-shadow(0 1.25rem 1.4rem rgba(58, 38, 20, 0.1))
+    drop-shadow(0 2.5rem 3.6rem var(--wedding-card-shadow));
+  position: relative;
+  width: 100%;
+}
+
+.paper {
+  background:
+    radial-gradient(
+      ellipse at 50% 18%,
+      rgba(255, 253, 247, 0.88) 0%,
+      rgba(255, 253, 247, 0.4) 34%,
+      rgba(244, 234, 216, 0) 64%
+    ),
+    linear-gradient(135deg, var(--wedding-card-bg-soft), var(--wedding-card-bg));
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  position: absolute;
+  -webkit-mask:
+    radial-gradient(
+        circle at 0 0,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      0 0 / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 100% 0,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      100% 0 / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 100% 100%,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      100% 100% / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 0 100%,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      0 100% / 51% 51% no-repeat;
+  mask:
+    radial-gradient(
+        circle at 0 0,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      0 0 / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 100% 0,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      100% 0 / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 100% 100%,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      100% 100% / 51% 51% no-repeat,
+    radial-gradient(
+        circle at 0 100%,
+        transparent 0 var(--wedding-card-notch),
+        #000 calc(var(--wedding-card-notch) + 1px)
+      )
+      0 100% / 51% 51% no-repeat;
+}
+
+.paper::before,
+.paper::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.paper::before {
+  background-image:
+    repeating-linear-gradient(
+      3deg,
+      rgba(104, 77, 48, 0.03) 0,
+      rgba(104, 77, 48, 0.03) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      93deg,
+      rgba(255, 255, 255, 0.32) 0,
+      rgba(255, 255, 255, 0.32) 1px,
+      transparent 1px,
+      transparent 7px
+    ),
+    radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.48), transparent 28%),
+    radial-gradient(circle at 82% 78%, rgba(210, 184, 141, 0.08), transparent 34%);
+  mix-blend-mode: multiply;
+  opacity: 0.62;
+  z-index: 1;
+}
+
+.paper::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.68),
+    inset 0 0.8rem 2.2rem rgba(255, 255, 255, 0.52),
+    inset 0 -1.2rem 2.6rem rgba(167, 126, 70, 0.08);
+  z-index: 6;
+}
+
+.borderFrame {
+  inset: clamp(0.75rem, 4.6%, 1.4rem);
+  pointer-events: none;
+  position: absolute;
+  z-index: 5;
+}
+
+.borderFrame svg {
+  display: block;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+
+.borderFrame path {
+  fill: none;
+  stroke: var(--wedding-card-border);
+  stroke-linejoin: round;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.floral {
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter:
+    saturate(0.86)
+    brightness(1)
+    contrast(1.08)
+    drop-shadow(-1px -1px 0 rgba(255, 255, 255, 0.62))
+    drop-shadow(1px 1px 0 rgba(112, 77, 41, 0.1));
+  opacity: var(--wedding-card-floral-opacity);
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.floralTop {
+  background-image: url("/images/wedding-assets/card-flowers-bottom-left.png");
+  background-position: center;
+  height: 38%;
+  right: 5.5%;
+  top: 5.5%;
+  transform: none;
+  transform-origin: center;
+  width: 55%;
+}
+
+.floralBottom {
+  background-image: url("/images/wedding-assets/card-flowers-top-right.png");
+  background-position: center;
+  bottom: 5.5%;
+  height: 38%;
+  left: 5.5%;
+  transform: none;
+  transform-origin: center;
+  width: 58%;
+}
+
+.medallion {
+  align-items: center;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 42% 34%, rgba(255, 255, 255, 0.78), rgba(250, 243, 232, 0.9) 58%),
+    var(--wedding-card-bg);
+  border: 1px solid var(--wedding-card-border);
+  border-radius: 999px;
+  box-shadow:
+    0 0.45rem 0.75rem rgba(82, 56, 28, 0.12),
+    0 0 0 0.45rem rgba(255, 255, 255, 0.28),
+    inset 0 0.13rem 0.25rem rgba(255, 255, 255, 0.9),
+    inset 0 -0.12rem 0.25rem rgba(144, 104, 51, 0.1);
+  color: var(--wedding-card-gold);
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 31.2%;
+  transform: translate(-50%, -50%);
+  width: clamp(5rem, 28.6%, 7.7rem);
+  z-index: 8;
+}
+
+.medallionIcon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.medallionIcon svg {
+  height: clamp(2rem, 13cqi, 3.15rem);
+  width: clamp(2rem, 13cqi, 3.15rem);
+}
+
+.divider {
+  color: var(--wedding-card-gold);
+  left: 50%;
+  opacity: 0.84;
+  pointer-events: none;
+  position: absolute;
+  top: 65.5%;
+  transform: translate(-50%, -50%);
+  width: 54%;
+  z-index: 7;
+}
+
+.divider svg {
+  display: block;
+  overflow: visible;
+  width: 100%;
+}
+
+.divider path,
+.divider circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.divider circle,
+.divider path:last-child {
+  fill: currentColor;
+}
+
+.contentSlot {
+  color: var(--wedding-card-ink);
+  inset: 0;
+  padding: var(--wedding-card-padding);
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  z-index: 9;
+}
+
+.number {
+  color: var(--wedding-card-gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(0.86rem, 4.2cqi, 1.08rem);
+  font-weight: 520;
+  left: 0;
+  line-height: 1;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 10.8%;
+}
+
+.number::after {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 15%,
+      currentColor 15%,
+      currentColor 42%,
+      transparent 42%,
+      transparent 58%,
+      currentColor 58%,
+      currentColor 85%,
+      transparent 85%
+    ),
+    radial-gradient(circle, currentColor 0 42%, transparent 45%);
+  background-position:
+    center,
+    center;
+  background-repeat: no-repeat;
+  background-size:
+    100% 1px,
+    0.38rem 0.38rem;
+  content: "";
+  display: block;
+  height: 0.48rem;
+  margin: 0.55rem auto 0;
+  opacity: 0.7;
+  width: 2rem;
+}
+
+.title {
+  align-items: center;
+  color: #5b432c;
+  display: flex;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.18rem, 6.25cqi, 1.9rem);
+  font-weight: 520;
+  justify-content: center;
+  letter-spacing: 0;
+  left: 13%;
+  line-height: 0.96;
+  margin: 0;
+  min-height: 2.25em;
+  overflow-wrap: break-word;
+  position: absolute;
+  right: 13%;
+  text-transform: uppercase;
+  text-wrap: balance;
+  top: 48.8%;
+}
+
+.meta {
+  display: grid;
+  gap: 0.42rem;
+  justify-items: center;
+  left: 11%;
+  margin: 0;
+  position: absolute;
+  right: 11%;
+  top: 72%;
+}
+
+.time,
+.location {
+  margin: 0;
+}
+
+.time {
+  color: var(--wedding-card-gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.08rem, 5.2cqi, 1.5rem);
+  font-weight: 540;
+  line-height: 1.05;
+}
+
+.location {
+  color: var(--wedding-card-muted);
+  font-size: clamp(0.88rem, 4.2cqi, 1.25rem);
+  font-weight: 650;
+  line-height: 1.18;
+  max-width: 86%;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.note {
+  color: #806a4f;
+  font-size: clamp(0.88rem, 4.1cqi, 1.22rem);
+  font-weight: 650;
+  left: 12%;
+  line-height: 1.18;
+  margin: 0;
+  position: absolute;
+  right: 12%;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  top: 72%;
+}
+
+.note p {
+  margin: 0;
+}
+
+.cardInteractive .shell {
+  transition:
+    filter 180ms ease,
+    transform 180ms ease;
+}
+
+.cardInteractive:hover .shell {
+  filter:
+    drop-shadow(0 1.45rem 1.55rem rgba(58, 38, 20, 0.12))
+    drop-shadow(0 2.9rem 4rem rgba(58, 38, 20, 0.19));
+  transform: translateY(-3px);
+}
+
+.cardInteractive:active .shell {
+  transform: translateY(1px);
+}
+
+.interactiveContent {
+  pointer-events: auto;
+}
+
+.statShell {
+  --wedding-card-floral-opacity: 0.56;
+  --wedding-card-notch: clamp(0.9rem, 7%, 1.55rem);
+  --wedding-card-padding: clamp(0.9rem, 7%, 1.5rem);
+}
+
+.statShell .floralTop {
+  height: 34%;
+  opacity: 0.58;
+  right: 6%;
+  top: 6%;
+  width: 52%;
+}
+
+.statShell .floralBottom {
+  bottom: 6%;
+  height: 34%;
+  left: 6%;
+  opacity: 0.58;
+  width: 54%;
+}
+
+.statShell .divider {
+  top: 64.5%;
+  width: 55%;
+}
+
+.statContent {
+  display: block;
+}
+
+.statValue,
+.statLabel {
+  display: block;
+  left: 10%;
+  margin: 0;
+  overflow-wrap: break-word;
+  position: absolute;
+  right: 10%;
+  text-align: center;
+}
+
+.statValue {
+  color: var(--wedding-card-gold);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.6rem, 23cqi, 4.35rem);
+  font-weight: 520;
+  line-height: 0.88;
+  top: 38%;
+  transform: translateY(-50%);
+}
+
+.statLabel {
+  color: var(--wedding-card-ink);
+  font-size: clamp(0.72rem, 5.1cqi, 1.02rem);
+  font-weight: 820;
+  letter-spacing: 0;
+  line-height: 1.08;
+  text-transform: lowercase;
+  top: 72%;
+}
+
+.venueShell {
+  --wedding-card-floral-opacity: 0.64;
+}
+
+.venueShell .medallion {
+  top: 28%;
+  width: clamp(4.6rem, 24%, 6.25rem);
+}
+
+.venueShell .medallionIcon svg {
+  height: clamp(1.9rem, 10cqi, 2.75rem);
+  width: clamp(1.9rem, 10cqi, 2.75rem);
+}
+
+.venueShell .divider {
+  top: 66.5%;
+}
+
+.venueContent {
+  pointer-events: auto;
+}
+
+.venueText {
+  display: grid;
+  gap: 0.52rem;
+  justify-items: center;
+  left: 11%;
+  position: absolute;
+  right: 11%;
+  top: 39%;
+}
+
+.venueEyebrow {
+  color: var(--wedding-card-gold);
+  display: block;
+  font-size: clamp(0.62rem, 2.7cqi, 0.78rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.venueTitle {
+  color: var(--wedding-card-ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.2rem, 5.1cqi, 1.7rem);
+  font-weight: 520;
+  line-height: 1.02;
+  margin: 0;
+  max-width: 13rem;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.venueAddress,
+.venueNote {
+  color: var(--wedding-card-muted);
+  font-size: clamp(0.74rem, 3.2cqi, 0.95rem);
+  font-weight: 650;
+  line-height: 1.22;
+  margin: 0;
+  max-width: 15rem;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.venueNote {
+  color: #806a4f;
+}
+
+.venueAction {
+  left: 12%;
+  position: absolute;
+  right: 12%;
+  top: 72.2%;
+}
+
+.venueAction :global(.dark-button) {
+  gap: clamp(0.45rem, 3cqi, 0.8rem);
+  min-height: clamp(3rem, 13cqi, 3.85rem);
+  padding: 0.75rem clamp(0.7rem, 4cqi, 1.2rem);
+  white-space: normal;
+  width: 100%;
+}
+
+.venueAction :global(.dark-button span) {
+  font-size: clamp(0.58rem, 3.2cqi, 0.78rem);
+  line-height: 1.12;
+}
+
+.venueAction :global(.dark-button svg) {
+  flex: 0 0 auto;
+  height: clamp(0.9rem, 5cqi, 1.2rem);
+  width: clamp(0.9rem, 5cqi, 1.2rem);
+}
+
+@media (max-width: 720px) {
+  .shell {
+    --wedding-card-notch: clamp(1rem, 8%, 1.7rem);
+  }
+}
+
+@container (max-width: 22rem) {
+  .shell {
+    --wedding-card-floral-opacity: 0.72;
+  }
+
+  .number {
+    font-size: clamp(0.72rem, 4.8cqi, 0.88rem);
+    top: 11%;
+  }
+
+  .number::after {
+    background-size:
+      100% 1px,
+      0.26rem 0.26rem;
+    height: 0.34rem;
+    margin-top: 0.34rem;
+    width: 1.35rem;
+  }
+
+  .medallion {
+    top: 29.2%;
+    width: 27%;
+  }
+
+  .medallionIcon svg {
+    height: clamp(1rem, 8cqi, 1.25rem);
+    width: clamp(1rem, 8cqi, 1.25rem);
+  }
+
+  .title {
+    font-size: clamp(0.78rem, 5.9cqi, 1.18rem);
+    left: 11%;
+    line-height: 0.94;
+    min-height: 2.35em;
+    right: 11%;
+    top: 45.6%;
+  }
+
+  .divider {
+    top: 64.8%;
+    width: 58%;
+  }
+
+  .meta {
+    gap: 0.06rem;
+    left: 8%;
+    right: 8%;
+    top: 68.4%;
+  }
+
+  .time {
+    font-size: clamp(0.82rem, 7.6cqi, 1.05rem);
+    line-height: 0.98;
+  }
+
+  .location {
+    font-size: clamp(0.65rem, 6.2cqi, 0.88rem);
+    line-height: 1.05;
+    max-width: 82%;
+  }
+
+  .note {
+    font-size: clamp(0.65rem, 6.1cqi, 0.86rem);
+    left: 10%;
+    line-height: 1.04;
+    right: 10%;
+    top: 68.4%;
+  }
+
+  .statValue {
+    font-size: clamp(2.15rem, 24cqi, 3.2rem);
+    top: 39%;
+  }
+
+  .statLabel {
+    font-size: clamp(0.6rem, 5.9cqi, 0.82rem);
+    top: 72.5%;
+  }
+
+  .venueShell {
+    --wedding-card-floral-opacity: 0.56;
+  }
+
+  .venueShell .medallion {
+    top: 27.2%;
+    width: 23%;
+  }
+
+  .venueShell .medallionIcon svg {
+    height: clamp(1.3rem, 8cqi, 1.75rem);
+    width: clamp(1.3rem, 8cqi, 1.75rem);
+  }
+
+  .venueText {
+    gap: 0.34rem;
+    left: 10%;
+    right: 10%;
+    top: 38.6%;
+  }
+
+  .venueEyebrow {
+    font-size: clamp(0.54rem, 3.8cqi, 0.68rem);
+  }
+
+  .venueTitle {
+    font-size: clamp(1rem, 6.1cqi, 1.28rem);
+    max-width: 11.5rem;
+  }
+
+  .venueAddress,
+  .venueNote {
+    font-size: clamp(0.64rem, 4.5cqi, 0.78rem);
+    line-height: 1.12;
+    max-width: 12.5rem;
+  }
+
+  .venueAction {
+    left: 10.5%;
+    right: 10.5%;
+    top: 72.8%;
+  }
+
+  .venueAction :global(.dark-button) {
+    min-height: clamp(2.75rem, 15cqi, 3.25rem);
+    padding: 0.6rem 0.65rem;
+  }
+
+  .venueAction :global(.dark-button span) {
+    font-size: clamp(0.52rem, 4cqi, 0.66rem);
+  }
+
+  .floralTop {
+    height: 36%;
+    right: 5%;
+    top: 5.4%;
+    width: 54%;
+  }
+
+  .floralBottom {
+    bottom: 5.2%;
+    height: 36%;
+    left: 5%;
+    width: 56%;
+  }
+}

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { WeddingCountdownCard } from "./WeddingDetailCard";
 
 type FaqItem = {
   question: string;
@@ -86,10 +87,13 @@ function CountdownFallback() {
   return (
     <div aria-hidden className="countdown-grid" data-reveal-group>
       {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
-        <div className="countdown-unit" data-reveal-child key={label}>
-          <span className="countdown-value">00</span>
-          <span className="label">{label}</span>
-        </div>
+        <WeddingCountdownCard
+          className="countdown-card"
+          data-reveal-child
+          key={label}
+          label={label}
+          value="00"
+        />
       ))}
     </div>
   );

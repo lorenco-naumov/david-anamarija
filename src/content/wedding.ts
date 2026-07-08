@@ -51,43 +51,45 @@ export const wedding = {
   details: [
     {
       title: "Church",
-      description:
-        '3:30 PM - Church "St. Archangel Michael", Avtokomanda',
+      time: "15:30",
+      location: 'Church "St. Archangel Michael", Avtokomanda',
       icon: "ceremony",
       mapUrl: churchMapUrl,
     },
     {
       title: "Marriage Registry",
-      description: "6:30 PM - La Tana restaurant, Skopje",
+      time: "18:30",
+      location: "La Tana restaurant, Skopje",
       icon: "registry",
       mapUrl: restaurantMapUrl,
     },
     {
       title: "Reception of Guests",
-      description: "7:00 PM - La Tana Wedding, Kamnik Complex",
+      time: "19:00",
+      location: "La Tana Wedding, Kamnik Complex",
       icon: "reception",
       mapUrl: restaurantMapUrl,
     },
     {
       title: "Note",
-      description:
+      note:
         "Marriage registry takes place immediately before guest reception at La Tana Wedding.",
       icon: "music",
     },
   ],
   timeline: [
     {
-      time: "3:30 PM",
+      time: "15:30",
       label: "Church",
       description: 'St. Archangel Michael, Avtokomanda.',
     },
     {
-      time: "6:30 PM",
+      time: "18:30",
       label: "Marriage Registry",
       description: "As part of La Tana restaurant, Skopje.",
     },
     {
-      time: "7:00 PM",
+      time: "19:00",
       label: "Reception of Guests",
       description: "La Tana Wedding, Kamnik Complex.",
     },
