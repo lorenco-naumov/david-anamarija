@@ -14,24 +14,38 @@ import {
 import {
   DeferredCountdown,
 } from "@/components/DeferredClientComponents";
+import { DocumentLanguage } from "@/components/DocumentLanguage";
 import { MotionController } from "@/components/MotionController";
 import { WeddingDetailCard, WeddingVenueCard } from "@/components/WeddingDetailCard";
-import { wedding } from "@/content/wedding";
+import { type Locale, resolveLocale, weddingContent } from "@/content/wedding";
 
-export default function Home() {
+type Wedding = (typeof weddingContent)[Locale];
+type HomeSearchParams = Promise<{
+  lang?: string | string[] | undefined;
+}>;
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: HomeSearchParams;
+}) {
+  const locale = resolveLocale((await searchParams).lang);
+  const wedding = weddingContent[locale];
+
   return (
     <>
-      <SiteHeader />
-      <main className="invitation-page">
+      <DocumentLanguage lang={locale} />
+      <SiteHeader locale={locale} wedding={wedding} />
+      <main className="invitation-page" data-locale={locale} lang={locale}>
         <FloralDecoration placement="top" />
         <div className="invitation-content">
           <MotionController />
-          <Hero />
-          <WeddingDetails />
-          <CountdownSection />
-          <DayTimeline />
-          <Venue />
-          <Closing />
+          <Hero wedding={wedding} />
+          <WeddingDetails locale={locale} wedding={wedding} />
+          <CountdownSection wedding={wedding} />
+          <DayTimeline wedding={wedding} />
+          <Venue wedding={wedding} />
+          <Closing wedding={wedding} />
         </div>
         <FloralDecoration placement="bottom" />
       </main>
@@ -107,17 +121,19 @@ function HashScrollScript() {
   );
 }
 
-function Hero() {
+function Hero({ wedding }: { wedding: Wedding }) {
   return (
     <section className="hero-section invitation-section" id="top">
       <div className="hero-copy" data-reveal>
         <div className="hero-lockup">
           <h1 className="couple-line" aria-label={wedding.couple.names}>
-            <span className="couple-name-main">Ana Marija</span>
+            <span className="couple-name-main">{wedding.couple.firstName}</span>
             <span className="couple-name-amp">&amp;</span>
-            <span className="couple-name-second">David</span>
+            <span className="couple-name-second">
+              {wedding.couple.secondName}
+            </span>
           </h1>
-          <DateStamp />
+          <DateStamp wedding={wedding} />
         </div>
       </div>
 
@@ -136,12 +152,22 @@ function Hero() {
   );
 }
 
-function WeddingDetails() {
+function WeddingDetails({
+  locale,
+  wedding,
+}: {
+  locale: Locale;
+  wedding: Wedding;
+}) {
+  const copy = wedding.copy;
+
   return (
     <section className="details-section invitation-section" id="details">
       <div className="details-copy" data-reveal>
-        <h2 className="display section-title left-title">The Details</h2>
-        <p className="section-body">Everything you need for the evening.</p>
+        <h2 className="display section-title left-title">
+          {copy.detailsHeading}
+        </h2>
+        <p className="section-body">{copy.detailsBody}</p>
       </div>
 
       <div className="detail-grid" data-reveal-group>
@@ -149,7 +175,9 @@ function WeddingDetails() {
           return (
             <WeddingDetailCard
               aria-label={
-                "mapUrl" in detail ? `Open ${detail.title} directions` : undefined
+                "mapUrl" in detail
+                  ? getDirectionsAriaLabel(locale, detail.title)
+                  : undefined
               }
               data-reveal-child
               href={"mapUrl" in detail ? detail.mapUrl : undefined}
@@ -169,16 +197,22 @@ function WeddingDetails() {
   );
 }
 
-function CountdownSection() {
+function CountdownSection({ wedding }: { wedding: Wedding }) {
+  const copy = wedding.copy;
+
   return (
     <section className="countdown-section invitation-section" id="countdown">
       <div className="center-copy" data-reveal>
-        <h2 className="display section-title">The celebration begins soon</h2>
+        <h2 className="display section-title">{copy.countdownHeading}</h2>
       </div>
       <div className="countdown-wrap">
-        <DeferredCountdown target={wedding.date.iso} />
+        <DeferredCountdown
+          labels={copy.countdown}
+          target={wedding.date.iso}
+        />
         <p className="countdown-note">
-          Set your calendar for an <em>unforgettable evening</em> in{" "}
+          {copy.countdownNotePrefix} <em>{copy.countdownNoteEmphasis}</em>{" "}
+          {copy.countdownNoteSuffix}{" "}
           {wedding.venue.city}.
         </p>
       </div>
@@ -186,11 +220,13 @@ function CountdownSection() {
   );
 }
 
-function DayTimeline() {
+function DayTimeline({ wedding }: { wedding: Wedding }) {
   return (
     <section className="timeline-section invitation-section" id="timeline">
       <div className="center-copy timeline-head" data-reveal>
-        <h2 className="display section-title">How the evening unfolds</h2>
+        <h2 className="display section-title">
+          {wedding.copy.timelineHeading}
+        </h2>
       </div>
       <ol
         className="timeline-list"
@@ -212,12 +248,12 @@ function DayTimeline() {
   );
 }
 
-function Venue() {
+function Venue({ wedding }: { wedding: Wedding }) {
   return (
     <section className="venue-section invitation-section" id="venue">
       <div className="venue-copy" data-reveal>
         <h2 className="display section-title">
-          An evening in the heart of Skopje
+          {wedding.copy.venueHeading}
         </h2>
         <Ornament />
         <p className="section-body">{wedding.venue.arrival}</p>
@@ -251,44 +287,83 @@ function Venue() {
   );
 }
 
-function Closing() {
+function Closing({ wedding }: { wedding: Wedding }) {
+  const copy = wedding.copy;
+
   return (
     <section className="closing-section invitation-section" id="closing">
       <div className="closing-copy" data-reveal>
-        <h2 className="display section-title left-title">Celebrate with us</h2>
-        <p className="section-body">We would love to share this night with you.</p>
+        <h2 className="display section-title left-title">
+          {copy.closingHeading}
+        </h2>
+        <p className="section-body">{copy.closingBody}</p>
         <p className="answer-note" id="message">
-          Tell us your answer by {wedding.rsvp.deadline}.
+          {copy.answerNotePrefix} {wedding.rsvp.deadline}.
         </p>
         <footer className="closing-signature">
-          <p className="script-text">With love</p>
-          <p>Jovovikj &amp; Bozhinovi</p>
+          <p className="script-text">{copy.signatureScript}</p>
+          <p>{copy.signatureNames}</p>
         </footer>
       </div>
     </section>
   );
 }
 
-function SiteHeader() {
+function SiteHeader({
+  locale,
+  wedding,
+}: {
+  locale: Locale;
+  wedding: Wedding;
+}) {
+  const nav = wedding.copy.nav;
+
   return (
-    <header className="site-header" aria-label="Wedding navigation">
-      <a className="brand-mark nav-brand" href="#top" aria-label="Ana Marija and David">
-        A <span>|</span> D
+    <header className="site-header" aria-label={nav.ariaLabel} lang={locale}>
+      <a
+        className="brand-mark nav-brand"
+        href="#top"
+        aria-label={nav.brandAriaLabel}
+      >
+        {wedding.couple.initials.first} <span>|</span>{" "}
+        {wedding.couple.initials.second}
       </a>
-      <details className="nav-menu">
-        <summary aria-label="Open menu">
-          <span>Menu</span>
-          <Menu aria-hidden size={28} strokeWidth={1.15} />
-        </summary>
-        <nav className="nav-panel" aria-label="Page sections">
-          <a href="#top">Home</a>
-          <a href="#details">Details</a>
-          <a href="#countdown">Countdown</a>
-          <a href="#timeline">Timeline</a>
-          <a href="#venue">Venue</a>
-          <a href="#closing">Message</a>
+      <div className="header-actions">
+        <nav
+          aria-label={wedding.copy.languageAriaLabel}
+          className="language-switcher"
+        >
+          <a
+            aria-current={locale === "mk" ? "page" : undefined}
+            href="?lang=mk#top"
+            lang="mk"
+          >
+            MK
+          </a>
+          <span aria-hidden>|</span>
+          <a
+            aria-current={locale === "en" ? "page" : undefined}
+            href="?lang=en#top"
+            lang="en"
+          >
+            EN
+          </a>
         </nav>
-      </details>
+        <details className="nav-menu">
+          <summary aria-label={nav.menuAriaLabel}>
+            <span>{nav.menuLabel}</span>
+            <Menu aria-hidden size={28} strokeWidth={1.15} />
+          </summary>
+          <nav className="nav-panel" aria-label={nav.panelAriaLabel}>
+            <a href="#top">{nav.links.top}</a>
+            <a href="#details">{nav.links.details}</a>
+            <a href="#countdown">{nav.links.countdown}</a>
+            <a href="#timeline">{nav.links.timeline}</a>
+            <a href="#venue">{nav.links.venue}</a>
+            <a href="#closing">{nav.links.closing}</a>
+          </nav>
+        </details>
+      </div>
     </header>
   );
 }
@@ -303,7 +378,7 @@ function Ornament({ align = "center" }: { align?: "center" | "left" }) {
   );
 }
 
-function DateStamp() {
+function DateStamp({ wedding }: { wedding: Wedding }) {
   return (
     <div className="date-stamp" aria-label={wedding.date.numericLabel}>
       <span>{wedding.date.day}</span>
@@ -335,4 +410,12 @@ function DetailIcon({ type }: { type: string }) {
   }
 
   return <Shirt {...props} />;
+}
+
+function getDirectionsAriaLabel(locale: Locale, title: string) {
+  if (locale === "mk") {
+    return `Отвори насоки: ${title}`;
+  }
+
+  return `Open ${title} directions`;
 }

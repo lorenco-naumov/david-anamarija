@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Great_Vibes, Manrope } from "next/font/google";
+import {
+  Bodoni_Moda,
+  Cormorant_Garamond,
+  Great_Vibes,
+  Manrope,
+} from "next/font/google";
 import "./globals.css";
 
 const display = Bodoni_Moda({
@@ -8,15 +13,21 @@ const display = Bodoni_Moda({
   display: "swap",
 });
 
+const cyrillicDisplay = Cormorant_Garamond({
+  variable: "--font-display-cyrillic",
+  subsets: ["cyrillic", "latin"],
+  display: "swap",
+});
+
 const sans = Manrope({
   variable: "--font-ui",
-  subsets: ["latin"],
+  subsets: ["cyrillic", "latin"],
   display: "swap",
 });
 
 const script = Great_Vibes({
   variable: "--font-script",
-  subsets: ["latin"],
+  subsets: ["cyrillic", "latin"],
   weight: "400",
   display: "swap",
 });
@@ -55,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${script.variable} h-full antialiased`}
+      className={`${display.variable} ${cyrillicDisplay.variable} ${sans.variable} ${script.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

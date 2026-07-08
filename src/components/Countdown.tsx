@@ -3,6 +3,23 @@
 import { useEffect, useMemo, useState } from "react";
 import { WeddingCountdownCard } from "./WeddingDetailCard";
 
+export type CountdownLabels = {
+  labels: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
+  aria: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+    conjunction: string;
+    suffix: string;
+  };
+};
+
 function getCountdown(target: string) {
   const diff = Math.max(0, new Date(target).getTime() - Date.now());
   const minute = 1000 * 60;
@@ -21,16 +38,22 @@ function pad(value: number) {
   return String(value).padStart(2, "0");
 }
 
-export function Countdown({ target }: { target: string }) {
+export function Countdown({
+  labels,
+  target,
+}: {
+  labels: CountdownLabels;
+  target: string;
+}) {
   const [remaining, setRemaining] = useState(() => getCountdown(target));
   const values = useMemo(
     () => [
-      { value: remaining.days, label: "Days" },
-      { value: remaining.hours, label: "Hours" },
-      { value: remaining.minutes, label: "Minutes" },
-      { value: remaining.seconds, label: "Seconds" },
+      { value: remaining.days, label: labels.labels.days },
+      { value: remaining.hours, label: labels.labels.hours },
+      { value: remaining.minutes, label: labels.labels.minutes },
+      { value: remaining.seconds, label: labels.labels.seconds },
     ],
-    [remaining],
+    [labels, remaining],
   );
 
   useEffect(() => {
@@ -43,7 +66,7 @@ export function Countdown({ target }: { target: string }) {
 
   return (
     <div
-      aria-label={`${remaining.days} days, ${remaining.hours} hours, ${remaining.minutes} minutes, and ${remaining.seconds} seconds until the wedding`}
+      aria-label={`${remaining.days} ${labels.aria.days}, ${remaining.hours} ${labels.aria.hours}, ${remaining.minutes} ${labels.aria.minutes} ${labels.aria.conjunction} ${remaining.seconds} ${labels.aria.seconds} ${labels.aria.suffix}`}
       className="countdown-grid"
       data-reveal-group
     >

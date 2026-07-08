@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import type { CountdownLabels } from "./Countdown";
 import { WeddingCountdownCard } from "./WeddingDetailCard";
 
 type FaqItem = {
@@ -11,10 +12,7 @@ type FaqItem = {
 
 const CountdownClient = dynamic(
   () => import("./Countdown").then((module) => module.Countdown),
-  {
-    loading: CountdownFallback,
-    ssr: false,
-  },
+  { ssr: false },
 );
 
 const FaqAccordionClient = dynamic<{ items: readonly FaqItem[] }>(
@@ -25,10 +23,16 @@ const FaqAccordionClient = dynamic<{ items: readonly FaqItem[] }>(
   },
 );
 
-export function DeferredCountdown({ target }: { target: string }) {
+export function DeferredCountdown({
+  labels,
+  target,
+}: {
+  labels: CountdownLabels;
+  target: string;
+}) {
   return (
-    <ViewportIsland fallback={<CountdownFallback />}>
-      <CountdownClient target={target} />
+    <ViewportIsland fallback={<CountdownFallback labels={labels} />}>
+      <CountdownClient labels={labels} target={target} />
     </ViewportIsland>
   );
 }
@@ -83,10 +87,15 @@ function ViewportIsland({
   return <div ref={ref}>{active ? children : fallback}</div>;
 }
 
-function CountdownFallback() {
+function CountdownFallback({ labels }: { labels: CountdownLabels }) {
   return (
     <div aria-hidden className="countdown-grid" data-reveal-group>
-      {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
+      {[
+        labels.labels.days,
+        labels.labels.hours,
+        labels.labels.minutes,
+        labels.labels.seconds,
+      ].map((label) => (
         <WeddingCountdownCard
           className="countdown-card"
           data-reveal-child
