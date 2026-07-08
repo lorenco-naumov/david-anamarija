@@ -30,7 +30,7 @@ export const wedding = {
     locations: [
       {
         label: "Church",
-        name: 'Church "St. Archangel Michael"',
+        name: "St. Archangel Michael",
         address: "Avtokomanda, Skopje",
         buttonLabel: "Open church directions",
         mapUrl: churchMapUrl,

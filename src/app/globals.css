@@ -101,9 +101,7 @@ summary:focus-visible {
 }
 
 .invitation-page {
-  background:
-    linear-gradient(90deg, rgba(255, 253, 248, 0.76), rgba(247, 241, 233, 0.92)),
-    var(--paper);
+  background-color: var(--paper);
   min-height: 100dvh;
   overflow-x: clip;
   position: relative;
@@ -145,13 +143,67 @@ summary:focus-visible {
 }
 
 .invitation-section {
+  --canvas-bleed-bottom: clamp(5.5rem, 8vw, 8.5rem);
+  --canvas-bleed-top: clamp(5.5rem, 8vw, 8.5rem);
+  --canvas-feather-bottom: clamp(4.75rem, 6vw, 7rem);
+  --canvas-feather-top: clamp(4.75rem, 6vw, 7rem);
+  background-color: var(--paper);
   isolation: isolate;
   margin-inline: auto;
   min-height: 992px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   scroll-margin-top: 6.5rem;
   width: min(100%, 1586px);
+  z-index: 1;
+}
+
+.invitation-section::before {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 253, 248, 0.55) 0%,
+      rgba(255, 253, 248, 0.42) 42%,
+      rgba(247, 241, 233, 0.56) 100%
+    ),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.38), rgba(247, 241, 233, 0.54)),
+    url("/images/wedding-assets/canvas-vines.png");
+  background-position:
+    center,
+    center,
+    center;
+  background-repeat: no-repeat;
+  background-size:
+    cover,
+    cover,
+    cover;
+  content: "";
+  bottom: calc(-1 * var(--canvas-bleed-bottom));
+  left: 50%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--canvas-feather-top),
+    #000 calc(100% - var(--canvas-feather-bottom)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--canvas-feather-top),
+    #000 calc(100% - var(--canvas-feather-bottom)),
+    transparent 100%
+  );
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * var(--canvas-bleed-top));
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: 0;
+}
+
+.invitation-section > * {
+  position: relative;
   z-index: 1;
 }
 
@@ -360,12 +412,19 @@ summary:focus-visible {
 }
 
 .hero-section {
+  background-color: transparent;
+  background-image: none;
   display: grid;
   grid-template-columns: 42.5% 57.5%;
   min-height: 941px;
   overflow: visible;
   position: relative;
   width: min(100%, 1672px);
+  z-index: 4;
+}
+
+.hero-section::before {
+  display: none;
 }
 
 .hero-copy {
@@ -375,7 +434,7 @@ summary:focus-visible {
   padding-top: 5.4rem;
   position: relative;
   text-align: center;
-  z-index: 2;
+  z-index: 14;
 }
 
 .hero-copy .small-rule {
@@ -390,7 +449,7 @@ summary:focus-visible {
   position: relative;
   transform: translate(42px, 50px);
   width: max-content;
-  z-index: 4;
+  z-index: 15;
 }
 
 .hero-lockup::before {
@@ -453,7 +512,7 @@ summary:focus-visible {
   inset: 0;
   pointer-events: none;
   position: absolute;
-  z-index: 1;
+  z-index: 12;
 }
 
 .hero-dance-image {
@@ -464,7 +523,7 @@ summary:focus-visible {
   top: 45%;
   transform: translate(-50%, -50%);
   width: min(98vw, 89rem);
-  z-index: 3;
+  z-index: 12;
 }
 
 .hero-dance-image img {
@@ -502,6 +561,8 @@ summary:focus-visible {
 }
 
 .details-section {
+  --canvas-bleed-top: clamp(18rem, 20vw, 24rem);
+  --canvas-feather-top: clamp(7rem, 9vw, 10rem);
   display: grid;
   grid-template-columns: 43% 57%;
   padding: 7.5rem 6.2rem 4.875rem 8.9rem;
@@ -587,8 +648,13 @@ summary:focus-visible {
 }
 
 .detail-card h3 {
+  align-items: center;
+  display: flex;
   font-size: 2.45rem;
+  justify-content: center;
+  min-height: 4.65rem;
   margin: 0;
+  text-wrap: balance;
 }
 
 .detail-card p:last-child {
@@ -600,7 +666,25 @@ summary:focus-visible {
   max-width: 17rem;
 }
 
+.countdown-section::before {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 253, 248, 0.55) 0%,
+      rgba(255, 253, 248, 0.42) 42%,
+      rgba(247, 241, 233, 0.56) 100%
+    ),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.38), rgba(247, 241, 233, 0.54)),
+    url("/images/wedding-assets/canvas-line-florals.png");
+  background-position:
+    center,
+    center,
+    center top;
+}
+
 .countdown-section {
+  --canvas-bleed-bottom: clamp(2.75rem, 3.25vw, 4rem);
+  --canvas-feather-bottom: clamp(2.5rem, 3vw, 3.75rem);
   min-height: auto;
   padding: clamp(4.5rem, 5vw, 5.5rem) 9rem clamp(4.75rem, 5vw, 5.75rem);
 }
@@ -693,7 +777,27 @@ summary:focus-visible {
   font-size: 1.08rem;
 }
 
+.timeline-section::before {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 253, 248, 0.55) 0%,
+      rgba(255, 253, 248, 0.42) 42%,
+      rgba(247, 241, 233, 0.56) 100%
+    ),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.38), rgba(247, 241, 233, 0.54)),
+    url("/images/wedding-assets/canvas-rose-border.png");
+  background-position:
+    center,
+    center,
+    center top;
+}
+
 .timeline-section {
+  --canvas-bleed-bottom: clamp(2.75rem, 3.25vw, 4rem);
+  --canvas-bleed-top: clamp(2.75rem, 3.25vw, 4rem);
+  --canvas-feather-bottom: clamp(2.5rem, 3vw, 3.75rem);
+  --canvas-feather-top: clamp(2.5rem, 3vw, 3.75rem);
   min-height: auto;
   padding: clamp(4.75rem, 5.2vw, 5.5rem) 8.2rem clamp(4.5rem, 5vw, 5.25rem);
 }
@@ -800,6 +904,8 @@ summary:focus-visible {
 }
 
 .venue-section {
+  --canvas-bleed-top: clamp(2.75rem, 3.25vw, 4rem);
+  --canvas-feather-top: clamp(2.5rem, 3vw, 3.75rem);
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
@@ -835,13 +941,14 @@ summary:focus-visible {
 }
 
 .venue-card {
-  align-items: center;
+  align-items: start;
   background: rgba(255, 253, 248, 0.66);
   box-shadow: 0 1.3rem 2.8rem rgba(61, 42, 25, 0.1);
   color: var(--gold);
   display: grid;
   gap: 1.3rem;
   grid-template-columns: 4.4rem 1fr;
+  grid-template-rows: 1fr auto;
   margin: 0;
   max-width: none;
   padding: 2rem 2.1rem;
@@ -883,9 +990,13 @@ summary:focus-visible {
 }
 
 .venue-card-button {
+  align-self: end;
+  gap: 0.85rem;
   grid-column: 1 / -1;
-  justify-self: start;
+  justify-content: center;
+  justify-self: stretch;
   margin-top: 0.35rem;
+  padding-inline: 1.2rem;
 }
 
 .venue-image {
@@ -898,6 +1009,22 @@ summary:focus-visible {
 
 .object-venue {
   object-position: 48% 54%;
+}
+
+.closing-section::before {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 253, 248, 0.55) 0%,
+      rgba(255, 253, 248, 0.42) 42%,
+      rgba(247, 241, 233, 0.56) 100%
+    ),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.38), rgba(247, 241, 233, 0.54)),
+    url("/images/wedding-assets/canvas-line-florals.png");
+  background-position:
+    center,
+    center,
+    center bottom;
 }
 
 .closing-section {
@@ -985,6 +1112,10 @@ summary:focus-visible {
 
 @media (max-width: 1280px) {
   .invitation-section {
+    --canvas-bleed-bottom: 5rem;
+    --canvas-bleed-top: 5rem;
+    --canvas-feather-bottom: 4rem;
+    --canvas-feather-top: 4rem;
     min-height: auto;
     width: 100%;
   }
@@ -1007,7 +1138,26 @@ summary:focus-visible {
   }
 
   .details-section {
+    --canvas-bleed-top: 8rem;
+    --canvas-feather-top: 5.5rem;
     padding-inline: 5rem;
+  }
+
+  .countdown-section {
+    --canvas-bleed-bottom: 3rem;
+    --canvas-feather-bottom: 2.75rem;
+  }
+
+  .timeline-section {
+    --canvas-bleed-bottom: 3rem;
+    --canvas-bleed-top: 3rem;
+    --canvas-feather-bottom: 2.75rem;
+    --canvas-feather-top: 2.75rem;
+  }
+
+  .venue-section {
+    --canvas-bleed-top: 3rem;
+    --canvas-feather-top: 2.75rem;
   }
 
   .closing-section {
@@ -1154,6 +1304,13 @@ summary:focus-visible {
     padding-bottom: 100px;
   }
 
+  .invitation-section {
+    --canvas-bleed-bottom: 2.5rem;
+    --canvas-bleed-top: 2.5rem;
+    --canvas-feather-bottom: 2.25rem;
+    --canvas-feather-top: 2.25rem;
+  }
+
   .page-floral-decoration {
     height: 66.667vw;
   }
@@ -1193,6 +1350,8 @@ summary:focus-visible {
   }
 
   .details-section {
+    --canvas-bleed-top: 3.5rem;
+    --canvas-feather-top: 3rem;
     padding-top: 3rem;
   }
 
@@ -1307,6 +1466,7 @@ summary:focus-visible {
 
   .detail-card h3 {
     font-size: clamp(1.55rem, 7vw, 2rem);
+    min-height: 3.8rem;
   }
 
   .detail-card p:last-child {
