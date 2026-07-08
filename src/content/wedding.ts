@@ -160,7 +160,7 @@ export const weddingContent = {
       ],
     },
     rsvp: {
-      deadline: "1 August 2027",
+      deadline: "15 August 2026",
     },
     details: [
       {
@@ -215,7 +215,7 @@ export const weddingContent = {
       },
       {
         question: "When should I RSVP?",
-        answer: "Please send your answer by 1 August 2027.",
+        answer: "Please send your answer by 15 August 2026.",
       },
       {
         question: "Is accommodation available nearby?",
@@ -314,7 +314,7 @@ export const weddingContent = {
       ],
     },
     rsvp: {
-      deadline: "1 август 2027",
+      deadline: "15 август 2026",
     },
     details: [
       {
@@ -369,7 +369,7 @@ export const weddingContent = {
       },
       {
         question: "До кога треба да потврдам присуство?",
-        answer: "Ве молиме испратете го вашиот одговор до 1 август 2027.",
+        answer: "Ве молиме испратете го вашиот одговор до 15 август 2026.",
       },
       {
         question: "Има ли сместување во близина?",
