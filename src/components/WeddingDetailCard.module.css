@@ -540,6 +540,8 @@
 }
 
 .venueAction {
+  display: flex;
+  justify-content: center;
   left: 12%;
   position: absolute;
   right: 12%;
@@ -548,21 +550,22 @@
 
 .venueAction :global(.dark-button) {
   gap: clamp(0.45rem, 3cqi, 0.8rem);
-  min-height: clamp(3rem, 13cqi, 3.85rem);
-  padding: 0.75rem clamp(0.7rem, 4cqi, 1.2rem);
+  min-height: clamp(2.45rem, 10.5cqi, 3.1rem);
+  max-width: 100%;
+  padding: 0.55rem clamp(0.72rem, 3.4cqi, 1rem);
   white-space: normal;
-  width: 100%;
+  width: fit-content;
 }
 
 .venueAction :global(.dark-button span) {
-  font-size: clamp(0.58rem, 3.2cqi, 0.78rem);
+  font-size: clamp(0.52rem, 2.7cqi, 0.68rem);
   line-height: 1.12;
 }
 
 .venueAction :global(.dark-button svg) {
   flex: 0 0 auto;
-  height: clamp(0.9rem, 5cqi, 1.2rem);
-  width: clamp(0.9rem, 5cqi, 1.2rem);
+  height: clamp(0.78rem, 4cqi, 1rem);
+  width: clamp(0.78rem, 4cqi, 1rem);
 }
 
 @media (max-width: 720px) {
@@ -694,12 +697,12 @@
   }
 
   .venueAction :global(.dark-button) {
-    min-height: clamp(2.75rem, 15cqi, 3.25rem);
-    padding: 0.6rem 0.65rem;
+    min-height: clamp(2.25rem, 12cqi, 2.75rem);
+    padding: 0.45rem 0.68rem;
   }
 
   .venueAction :global(.dark-button span) {
-    font-size: clamp(0.52rem, 4cqi, 0.66rem);
+    font-size: clamp(0.48rem, 3.4cqi, 0.58rem);
   }
 
   .floralTop {
